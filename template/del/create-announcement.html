@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h2>Create Announcement</h2>
+<div>
+	<form method="POST" action="">
+		{% csrf_token %}
+		{{form.as_p}}
+		<input type="radio" value="Student" id="Student" name="Submit To"/>
+		<label for="Student">Student</label>
+
+		<input type="radio" value="Teacher" id="Teacher" name="Submit To"/>
+		<label for="Teacher">Teacher</label>
+
+		<input type="radio" value="School Administrator" id="School Administrator" name="Submit To"/>
+		<label for="School Administrator">School Administrator</label>
+
+		<input type="submit" value="Submit">
+
+
+	</form>
+
+</div>
+
+{% endblock %}

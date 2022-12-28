@@ -1,0 +1,38 @@
+{% load static %}
+
+{% block content %}
+
+<aside>
+	<div class="sidebar">
+		{% url 'administrator' user.id as url %}
+		<a class="{% if request.path == url %}active{% endif %}" href="{{ url }}">
+			<span class="material-symbols-sharp " > grid_view</span>
+			<h3>Dashboard</h3>
+		</a>
+		{% url 'student-list' user.id as url %}
+		<a class="{% if request.path == url %}active{% endif %}" href="{{ url }}">
+			<span class="material-icons-sharp "> school </span>
+			<h3>Student</h3>
+		</a>
+		{% url 'teacher-list' user.id as url %}
+		<a class="{% if request.path == url %}active{% endif %}" href="{{ url }}">
+			<span class="material-icons-sharp "> person </span>
+			<h3>Teachers</h3>
+		</a>
+		{% url 'exam-list' user.id as url %}
+		<a class="{% if request.path == url %}active{% endif %}"  href="{{ url }}">
+			<span class="material-icons-sharp "> receipt_long </span>
+			<h3>Exam-list</h3>
+		</a>
+		<a href="#">
+			<span class="material-symbols-sharp "> insights</span>
+			<h3>Analysis</h3>
+		</a>
+		<a href="#">
+			<span class="material-symbols-sharp"> report_gmailerrorred</span>
+			<h3>Reports</h3>
+		</a>
+
+	</div>
+</aside>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="container3">
+	<main>
+		<header>
+			<h2>Welcome, {{user.name}}</h2>
+			<div class="register-btn">
+				<a href="{% url 'register-school' %}">
+					<button type="button"> Register School </button>
+				</a>
+			</div>
+		</header>
+
+		<div class="insights">
+			<div class="total student">
+				<span class="material-icons-sharp"> person </span>
+				<div class="middle">
+					<h2>Students</h2>
+					<h1><b>{{all_user}}</b></h1>
+				</div>
+			</div>
+
+			<div class="total student">
+				<span class="material-icons-sharp"> supervisor_account </span>
+				<div class="middle">
+					<h2>Teachers</h2>
+					<h1><b>{{teacher}}</b></h1>
+				</div>
+			</div>
+
+			<div class="total student">
+				<span class="material-icons-sharp"> school </span>
+				<div class="middle">
+					<h2>Schools</h2>
+					<h1><b>{{school.count}}</b></h1>
+				</div>
+			</div>
+		</div>
+
+		<div class="super-tabel">
+			<div class="stats">
+	<!--						STUDENT LIST-->
+				<div>
+					<h2>Students</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Registered</th>
+								<th>City</th>
+								<th>Sub-city</th>
+							</tr>
+						</thead>
+						<tbody>
+
+						{% for school in school %}
+						<tr>
+							<td>{{ school.name }}</td>
+							<td>{{ school.registered}}</td>
+							<td>{{ school.city}}</td>
+							<td>{{ school.sub_city }}</td>
+						</tr>
+						{% endfor %}
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</main>
+	<div class="col-sm-2">
+
+	</div>
+</div>
+
+{% endblock %}

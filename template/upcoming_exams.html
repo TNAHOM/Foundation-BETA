@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div>
+	<h3>{{ exam.subject }}</h3>
+	<h4>Exam date: {{ exam.date }}</h4>
+	<h4>Number of questions: {{ exam.questions }}</h4>
+	<h4>Descriptions: {{ exam.description }}</h4>
+
+</div>
+
+{% endblock %}

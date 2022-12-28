@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="login-page">
+  <div class="form">
+    <form method="POST" class="login-form">
+	    {% csrf_token %}
+      <input type="email" name="email" placeholder="email"/>
+      <input type="password" name="password" placeholder="password"/>
+	    <button type="submit" name="submit" >Submit</button>
+      <p class="message">Not registered? <a href="#">Create an account</a></p>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

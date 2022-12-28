@@ -1,0 +1,100 @@
+:root
+{
+    --dark-body: #4d4c5a;
+    --dark-main: #141529;
+    --dark-second: #79788c;
+    --dark-hover: #323048;
+    --dark-text: #f8fbff;
+    --light-body: #f3f8fe;
+    --light-main: #fdfdfd;
+    --light-second: #c3c2c8;
+    --light-hover: #edf0f5;
+    --light-text: #151426;
+    --blue: #007497;
+    --white: #fff;
+    --shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    --font-family: cursive;
+}
+a{
+    text-decoration: none;
+}
+
+a.button-color{
+  color: white;
+}
+.button-color:hover{
+  color: black;
+}
+.side{
+	height: 100%;
+}
+
+
+.btn-block{
+  width:100%;
+}
+.gradient-custom {
+    background: linear-gradient(to right, rgba(172,203,238,0.5), rgba(0,231,240,0.5))
+}
+
+.gradient-custom-2 {
+    /* fallback for old browsers */
+    background: #accbee;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, rgba(172,203,238,0.5), rgba(0,231,240,0.5))
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(172,203,238,0.5), rgba(0,231,240,0.5))
+  }
+
+.navbar-dark .nav-item .nav-link {
+    color: #fff;
+}
+
+.na{
+    background: linear-gradient(to right, rgba(172,203,238,0.5), rgba(0,231,240,0.5))
+}
+.navbar-dark .nav-item .nav-link:hover {
+  background-color: rgba(172,203,238,0.5);
+  transition: all 0.3s ease;
+  border-radius: 0.25rem;
+  color: #fff;
+}
+
+.fa-li {
+  position: relative;
+  left: 0;
+}
+
+body {
+  color: #333;
+	font-family: 'Roboto', sans-serif;
+	font-size: 15px;
+	line-height: 1.5;
+}
+
+.light {
+    --bg-body: var(--light-body);
+    --bg-main: var(--light-main);
+    --bg-second: var(--light-second);
+    --color-hover: var(--light-hover);
+    --color-txt: var(--light-text);
+}
+
+/* login */
+.error{
+  color: E55D42;
+}
+
+.success{
+  color: green;
+}
+
+.input-ans{
+  border: 2px solid red;
+  width:5px;
+}
+.num {
+  color: red;
+}

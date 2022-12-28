@@ -1,0 +1,81 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="form_wrapper container3">
+  <div class="form_container">
+    <div class="title_container">
+      <h2>{{ page }}'s Registration Form</h2>
+    </div>
+    <div class="row clearfix">
+      <div class="">
+        <form method="POST">
+	        {% csrf_token %}
+<!--	        NAME  -->
+	        <div class="row clearfix names-all">
+            <div>
+              <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                <input type="text" class="text-input" name="name" placeholder="First Name" required/>
+              </div>
+            </div>
+	          <div>
+              <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                <input type="text" class="text-input" name="fname" placeholder="Father Name" required/>
+              </div>
+            </div>
+            <div>
+              <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                <input type="text" class="text-input" name="gname" placeholder="Grand Father Name" required />
+              </div>
+            </div>
+          </div>
+
+	        <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
+            <input type="text" class="text-input" name="username" placeholder="Username" required />
+          </div>
+          <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
+            <input type="email" class="text-input" name="email" placeholder="Email" required />
+          </div>
+          <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
+            <input type="password" class="text-input" name="password1" placeholder="Password" required />
+          </div>
+          <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
+            <input type="password" class="text-input" name="password2" placeholder="Re-type Password" required />
+          </div>
+
+	        <div class="input_field radio_option">
+              <input type="radio" name="sex" value="M" class="radios" id="rd1">
+              <label for="rd1">Male</label>
+              <input type="radio" name="sex"  value="F" class="radios" id="rd2">
+              <label for="rd2">Female</label>
+	        </div>
+
+	        <div class="row clearfix">
+            <div class="col_half">
+              <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
+	              <input type="text" class="text-input" id="grade" name="class_grade" placeholder="Grade">
+              </div>
+            </div>
+	          <div class="col_half">
+              <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
+	              {% if page == 'Student' %}
+                <input type="text" class="text-input" name="section" placeholder="Section" />
+
+	              {% elif page == 'Teacher' %}
+								<div class="input_field select_option">
+			            {{ form.subject}}
+		              <div class="select_arrow"></div>
+	              </div>
+	              {% endif %}
+              </div>
+            </div>
+          </div>
+
+          <input class="submit" type="submit" value="Register" />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

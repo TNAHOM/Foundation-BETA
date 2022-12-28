@@ -1,0 +1,64 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="container3">
+	<div class="teach">
+		<div class="teach-list">
+			<div class="">
+				<div>
+					<table>
+						<thead>
+							<tr>
+								<td>Full Name</td>
+								<td>Section</td>
+								<td>Phone Number</td>
+								<td>Email</td>
+								<td>Sex</td>
+								<td>Grade</td>
+							</tr>
+						</thead>
+						<tbody>
+						{% for teacher in teacher %}
+							<tr>
+								<td>{{ teacher.name }}</td>
+								<td>{{ teacher.subject }}</td>
+								<td>{{ teacher.phone_num }}</td>
+								<td>{{ teacher.email }}</td>
+								<td>{{ teacher.sex }}</td>
+								<td>{{ teacher.class_grade }}</td>
+							</tr>
+						{% endfor %}
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+		<!--		SEARCH-->
+		</div>
+	</div>
+
+	<div class="teach">
+		<div class="teach-search">
+			<table>
+				<h2>Search by:</h2>
+				<thead>
+					<tr>
+						<td>Full Name</td>
+						<td>Section</td>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr>
+						<td><input type="search" placeholder="Search.."/></td>
+						<td><input type="search" placeholder="Search.."/></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</div>
+
+{% endblock %}

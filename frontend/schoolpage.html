@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<!-- Material cdn -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"  rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0" />
+	<link rel="stylesheet" href="./main1.css">
+</head>
+<body>
+
+	<div class="container">
+
+		<aside>
+			<div class="top">
+				<div class="logo">
+					<img src="./images/logo.jpg" alt="logo">
+					<h3>Fountain</h3>
+				</div>
+			</div>
+
+			<div class="sidebar">
+				<a  class="active" href="#">
+					<span class="material-symbols-sharp" > grid_view</span>
+					<h3>Dashboard</h3>
+				</a>
+				<a href="#">
+					<span class="material-icons-sharp"> school </span>
+					<h3>Student</h3>
+				</a>
+				<a href="#">
+					<span class="material-icons-sharp"> person </span>
+					<h3>Teachers</h3>
+				</a>
+				<a href="#">
+					<span class="material-icons-sharp"> supervisor_account </span>
+					<h3>Parents</h3>
+				</a>
+				<a href="#">
+					<span class="material-icons-sharp"> receipt_long </span>
+					<h3>Exam-list</h3>
+				</a>
+				<a href="#">
+					<span class="material-symbols-sharp"> insights</span>
+					<h3>Analysis</h3>
+				</a>
+				<a href="#">
+					<span class="material-symbols-sharp"> mail_outline</span>
+					<h3>Announcements</h3>
+					<span class="message-count">2</span>
+				</a>
+				<a href="#">
+					<span class="material-symbols-sharp"> report_gmailerrorred</span>
+					<h3>Reports</h3>
+				</a>
+				<a href="#">
+					<span class="material-symbols-sharp"> account_circle</span>
+					<h3>Account</h3>
+				</a>
+				<a href="#">
+					<span class="material-symbols-sharp"> logout</span>
+					<h3>Logout</h3>
+				</a>
+			</div>
+		</aside>
+
+		<main>
+			<header>
+				<h2>Welcome, Hill side</h2>
+				<div class="register-btn">
+					<button>Register Student</button>
+					<button>Register Teacher</button>
+					<button>Register Parents</button>
+				</div>
+			</header>
+
+			<div class="insights">
+				<div class="total student">
+					<span class="material-icons-sharp"> school </span>
+					<div class="middle">
+						<h2>Students</h2>
+						<h1>567</h1>
+					</div>
+				</div>
+
+				<div class="total teacher">
+					<span class="material-icons-sharp"> supervisor_account </span>
+					<div class="middle">
+						<h2>Teacher</h2>
+						<h1>567</h1>
+					</div>
+				</div>
+
+				<div class="total parent">
+					<span class="material-icons-sharp"> person </span>
+					<div class="middle">
+						<h2>Parents</h2>
+						<h1>567</h1>
+					</div>
+				</div>
+			</div>
+
+			<div class="stats">
+				<div class="top-student">
+					<h2>Top Students</h2>
+					<table>
+						<thead>
+							<tr>
+								<td>Class</td>
+								<td>Full Name</td>
+								<td>Section</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td rowspan="3">12</td>
+								<td>Nahom Tamirat Kebede</td>
+								<td>E</td>
+							</tr>
+							<tr>
+								<td>Nathnael Dereje Assefa</td>
+								<td>D</td>
+							</tr>
+							<tr>
+								<td>Sofia Melkamu Wondwesen</td>
+								<td>A</td>
+							</tr>
+
+							<tr>
+								<td rowspan="3">11</td>
+								<td>Yoseph Abera Fuuku</td>
+								<td>F</td>
+							</tr>
+							<tr>
+								<td>Abeselom Wondalu Kinfu</td>
+								<td>D</td>
+							</tr>
+							<tr>
+								<td>Dawit Belay musulugn</td>
+								<td>B</td>
+							</tr>
+
+							<tr>
+								<td rowspan="3">10</td>
+								<td>Nahom Tamirat Kebede</td>
+								<td>E</td>
+							</tr>
+							<tr>
+								<td>Nathnael Dereje Assefa</td>
+								<td>D</td>
+							</tr>
+							<tr>
+								<td>Sofia Melkamu Wondwesen</td>
+								<td>A</td>
+							</tr>
+
+							<tr>
+								<td rowspan="3">9</td>
+								<td>Yoseph Abera Fuuku</td>
+								<td>F</td>
+							</tr>
+							<tr>
+								<td>Abeselom Wondalu Kinfu</td>
+								<td>D</td>
+							</tr>
+							<tr>
+								<td>Dawit Belay musulugn</td>
+								<td>B</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="">
+					<h2>Stats</h2>
+					<div class="statistics">
+						<h3>Overall Result</h3>
+	          <canvas class="graph" id="myChart"></canvas>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<div class="right">
+			<div class="profile">
+				<div class="info">
+					<p>Hey, <b>Nahom</b></p>
+					<small class="text-muted">Admin</small>
+				</div>
+				<div class="profile-photo">
+					<img src="./images/logo.jpg" alt="">
+				</div>
+			</div>
+
+			<div class="announcements">
+				<h2>Announcement</h2>
+				<div class="announce">
+
+					<div class="announces">
+						<div class="profile-photo">
+							<img src="./images/logo.jpg" alt="">
+						</div>
+						<div class="message">
+							<p><b>Nahom Tamirat</b>received his order of Night lion TEACH GPS drone</p>
+							<small class="text-muted">2 Minute Ago</small>
+						</div>
+					</div>
+
+					<div class="announces">
+						<div class="profile-photo">
+							<img src="./images/logo.jpg" alt="">
+						</div>
+						<div class="message">
+							<p><b>Nahom Tamirat</b>received his order of Night lion TEACH GPS drone</p>
+							<small class="text-muted">2 Minute Ago</small>
+						</div>
+					</div>
+
+					<div class="announces">
+						<div class="profile-photo">
+							<img src="./images/logo.jpg" alt="">
+						</div>
+						<div class="message">
+							<p><b>Nahom Tamirat</b>received his order of Night lion TEACH GPS drone</p>
+							<small class="text-muted">2 Minute Ago</small>
+						</div>
+					</div>
+					<h3>See all...</h3>
+				</div>
+			</div>
+
+			<div class="exam-list">
+				<h2>Exam Day</h2>
+
+				<div class="exam">
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="./graph.js"></script>
+</body>
+</html>

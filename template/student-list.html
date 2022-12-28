@@ -1,0 +1,69 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="stu">
+	<div class="stats">
+		<div class="top-student">
+			<h2>Grade 12 Students</h2>
+			<table>
+				<thead>
+					<tr>
+						<td>Full Name</td>
+						<td>Section</td>
+					</tr>
+				</thead>
+				<tbody>
+				{% for student in student %}
+					<tr>
+						<td>{{ student.name }}</td>
+						<td>{{ student.section }}</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		</div>
+
+		<div class="top-student">
+			<h2>Grade 11 Students</h2>
+			<table>
+				<thead>
+					<tr>
+						<td>Full Name</td>
+						<td>Section</td>
+					</tr>
+				</thead>
+				<tbody>
+				{% for student in student %}
+					<tr>
+						<td><a href="{% url 'profile' student.id%}">{{ student.name }}</a></td>
+						<td>{{ student.section }}</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		</div>
+
+		<div class="teach-search">
+			<table>
+				<h2>Search by:</h2>
+				<thead>
+					<tr>
+						<td>Full Name</td>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr>
+						<form method="GET">
+							<td><input type="search" name="q" placeholder="Search.."/></td>
+						</form>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</div>
+
+{% endblock %}

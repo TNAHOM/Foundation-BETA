@@ -1,0 +1,26 @@
+{% load static %}
+
+{% block content %}
+
+<aside>
+	<div class="sidebar">
+		{% url 'superuser' user.id as url %}
+		<a class="{% if request.path == url %}active{% endif %}" href="{{ url }}">
+			<span class="material-symbols-sharp" > grid_view</span>
+			<h3>Dashboard</h3>
+		</a>
+
+		<a href="#">
+			<span class="material-symbols-sharp "> insights</span>
+			<h3>Analysis</h3>
+		</a>
+		<a href="#">
+			<span class="material-symbols-sharp"> report_gmailerrorred</span>
+			<h3>Reports</h3>
+		</a>
+
+	</div>
+</aside>
+
+
+{% endblock %}

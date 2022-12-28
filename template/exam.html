@@ -1,0 +1,107 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<form method="POST" class="exam" xmlns="http://www.w3.org/1999/html">
+	{% csrf_token %}
+	<main>
+		<header>
+			<h2>Create Exam Answer</h2>
+			<div class="register-btn">
+				<button type="submit" class="btn">SUBMIT</button>
+			</div>
+		</header>
+
+		<div class="exam-info">
+			<div class="col-4">
+				<label for="uname">Unique Name:</label>
+				<input type="text" name="unique_name" id="uname" class="form-control" placeholder="Enter a unique name" required/>
+			</div>
+
+			<div class="col-2">
+				<label for="total">Number Of Questions:</label>
+				<input type="number" name="no_of_questions" id="total" class="form-control" required/>
+			</div>
+
+			<div class="col-3">
+				<label for="sdate">Start Date And Time</label>
+				<input type="datetime-local" name="start_time" id="sdate" class="form-control" required/>
+			</div>
+
+			<div class="col-3">
+				<label for="edate">End Date And Time</label>
+				<input type="datetime-local" name="end_time" id="edate" class="form-control" required/>
+			</div>
+		</div>
+
+		<div class="ans-info">
+			<div class="ans-choose">
+<!--				<h4>Choose:</h4>-->
+				{% for num in max_choose %}
+				<div class="num">
+					{{num}}
+				</div>
+				<div class="options">
+					<div>
+						<label for="A">A</label>
+						<input type="radio" name="choose_answer{{num}}" id="A" value="A"/>
+					</div>
+					<div>
+						<label for="B" class="">B</label>
+						<input type="radio" name="choose_answer{{num}}" id="B" value="B"/>
+					</div>
+					<div>
+						<label for="C" class="">C</label>
+						<input type="radio" name="choose_answer{{num}}" id="C" value="C"/>
+					</div>
+
+					<div>
+						<label for="D" class="">D</label>
+						<input type="radio" name="choose_answer{{num}}" id="D" value="D"/>
+					</div>
+					<div>
+						<label for="E" class="">E</label>
+						<input type="radio" name="choose_answer" id="E" value="E"/>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+
+			<div class="ans-tf">
+				{% for num in max_truefalse_blank %}
+				<div class="num">
+					{{ num }})
+				</div>
+				<div class="options-tf">
+					<div>
+						<input type="radio" name="truefalse_answer{{num}}" id="true" value="true">
+						<label for="true">True</label>
+					</div>
+					<div>
+						<input type="radio" name="truefalse_answer{{num}}" id="false" value="false">
+						<label for="false">false</label>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+
+			<div class="">
+				<h3>Fill</h3>
+				<div class="ans-tf">
+					{% for num in max_truefalse_blank %}
+
+					<div class="">
+						<label for="fill">{{ num }})</label>
+					</div>
+					<div class="fill">
+						<input type="text" id='fill' name="fillblank_answer{{num}}" class="form-control">
+					</div>
+
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</main>
+</form>
+
+{% endblock %}

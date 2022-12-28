@@ -1,0 +1,74 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h2>Administrator</h2>
+
+
+<div>
+	<a href="{% url 'register-teacher' %}">Register Teacher</a>
+	<a href="{% url 'register-student' %}">Register Student</a>
+	<a href="{% url 'create-announcement' %}">Announce Announcement</a>
+</div>
+
+
+<div>
+	<h2>Announcements</h2>
+
+	{% for announce in announce %}
+		{% if announce.to == request.user.role %}
+			<h5><a href="{% url 'announcement' announce.id%}">{{ announce.subject }}</a></h5>
+		{% endif %}
+	{% endfor %}
+
+</div>
+
+
+<div>
+	<h3>List of Teachers</h3>
+	{% for teacher in teacher %}
+		<a href=" ">{{ teacher }}</a>
+	{% endfor %}
+</div>
+
+<div>
+	<h3>Upcoming Exam</h3>
+
+	<table>
+		<tr>
+			<th>Teachers</th>
+			<th>Subject</th>
+			<th>Date</th>
+		</tr>
+		{% for exam in exam %}
+		<tr>
+			<td>{{ exam.teacher.name }}</td>
+			<td>{{ exam.subject }}</td>
+			<td>{{ exam.date }}</td>
+		</tr>
+
+		{% endfor %}
+	</table>
+</div>
+
+<div>
+	<h3>List of Students</h3>
+	<table>
+		<tr>
+			<th>Students</th>
+			<th>Grade</th>
+			<th>Section</th>
+		</tr>
+		{% for student in student %}
+		<tr>
+			<td>{{ student.name }}</td>
+			<td>{{ student.class_grade }}</td>
+			<td>{{ student.section }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+</div>
+
+
+
+{% endblock %}

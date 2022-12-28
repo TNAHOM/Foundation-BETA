@@ -1,0 +1,79 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="teach">
+	<div class="teach-list">
+		<div>
+			<div class="teach-tab">
+				<h2>Grade 12</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>Teachers</th>
+							<th>Subject</th>
+							<th>Date</th>
+						</tr>
+					</thead>
+					<tbody>
+					{% for exam in exam %}
+					{% if exam.teacher.class_grade == 12 %}
+					<tr>
+						<td>{{ exam.teacher.name }}</td>
+						<td>{{ exam.subject }}</td>
+						<td>{{ exam.start_time }}</td>
+					</tr>
+					{% endif %}
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+
+			<div class="teach-tab">
+				<h2>Grade 11</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>Teachers</th>
+							<th>Subject</th>
+							<th>Date</th>
+						</tr>
+					</thead>
+					<tbody>
+					{% for exam in exam %}
+					{% if exam.teacher.class_grade == 11 %}
+					<tr>
+						<td>{{ exam.teacher.name }}</td>
+						<td>{{ exam.subject }}</td>
+						<td>{{ exam.start_time }}</td>
+					</tr>
+					{% endif %}
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+<!--		SEARCH-->
+		<div class="teach-search">
+			<table>
+				<h2>Search by:</h2>
+				<thead>
+					<tr>
+						<td>Teachers</td>
+						<td>Subject</td>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr>
+						<td><input type="search" placeholder="Search.."/></td>
+						<td><input type="search" placeholder="Search.."/></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

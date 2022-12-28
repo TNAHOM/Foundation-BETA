@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<form method="POST">
+	{% csrf_token %}
+	<label>Select a category</label>
+
+  <select class="form-control" name="email">
+    <option value="none">Select a category...</option>
+
+    {% for student in student %}
+	  {% if not student.section %}
+      <option value="{{student.email}}">{{ student }}</option>
+    {% endif %}
+	  {% endfor %}
+  </select>
+	{{ form.class_grade }}
+	{{ form.section }}
+
+	<input type="submit" value="submit">
+</form>
+
+{% endblock %}

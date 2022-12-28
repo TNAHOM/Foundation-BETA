@@ -1,0 +1,39 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="container3">
+	<div class="edit-pro">
+	  <div class="">
+		  <!--	for processing files/image enctype="multipart/form-data" -->
+
+		  <form method="POST" class="" enctype="multipart/form-data">
+		    {% csrf_token %}
+
+			  <label> {{form.username.label}}:</label>
+	      {{form.username}}
+			  <label>Email:</label>
+	      {{form.email}}
+			  <label>{{ form.phone_num.label}:}</label>
+	      {{ form.phone_num }}
+			  <label>{{ form.description.label }}:</label>
+			  {{ form.description }}
+			  <label>{{ form.class_grade.label }}</label>
+				{{ form.class_grade }}
+				<label>{{ form.website.label }}:</label>
+				{{ form.website }}
+			  <label>{{form.twitter.label}}:</label>
+			  {{ form.twitter }}
+				<label>{{form.Instagram.label}}:</label>
+			  {{ form.Instagram }}
+				<label>{{ form.linkedin.label }}:</label>
+				{{ form.linkedin }}
+			  <button name="submit">update account</button>
+
+	    </form>
+	  </div>
+	</div>
+
+</div>
+
+{% endblock %}

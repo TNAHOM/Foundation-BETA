@@ -1,0 +1,101 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %} Dashboard {% endblock title %}
+
+{% block content %}
+<div class="container3">
+	<main>
+		<header>
+
+			<h2>Welcome, {{ school.name }}</h2>
+			<div class="register-btn">
+				<a href="{% url 'register-student' %}">
+					<button type="button" class="btn">Register Student</button>
+				</a>
+				<a href="{% url 'register-teacher' %}">
+					<button type="button" class="btn">Register Teacher</button>
+				</a>
+			</div>
+		</header>
+
+		<div class="insights">
+			<div class="total student">
+				<span class="material-icons-sharp"> school </span>
+				<div class="middle">
+					<h2>Students</h2>
+					<h1>{{ student.count}}</h1>
+				</div>
+			</div>
+
+			<div class="total teacher">
+				<span class="material-icons-sharp"> supervisor_account </span>
+				<div class="middle">
+					<h2>Teacher</h2>
+					<h1>{{ teacher.count }}</h1>
+				</div>
+			</div>
+
+			<div class="total parent">
+				<span class="material-icons-sharp"> person </span>
+				<div class="middle">
+					<h2>Parents</h2>
+					<h1>0</h1>
+				</div>
+			</div>
+		</div>
+
+		<div class="stats">
+			<div class="top-student">
+				<h2>Top Students</h2>
+				<table>
+					<thead>
+						<tr>
+							<td>Class</td>
+							<td>Full Name</td>
+							<td>Section</td>
+						</tr>
+					</thead>
+					<tbody>
+					{% for student in student %}
+						<tr>
+							<td>{{ student.class_grade }}</td>
+							<td>{{ student.name }}</td>
+							<td>{{ student.section }}</td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+
+			<div class="">
+				<h2>Stats</h2>
+				<div class="statistics">
+					<h3>Overall Result</h3>
+          <canvas class="graph" id="myChart"></canvas>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<div class="right">
+
+<!--		EXAM DAY -->
+		<div class="announcement">
+			<h2>Exam Day</h2>
+			<div class="announce">
+				{% for exam in exam %}
+				<div class="announces">
+
+					<div class="message">
+						<h4><b>{{ exam.subject }}</b> {{ exam.start_time }}</h4>
+						<small class="text-muted">Submitted on {{ exam.created.date }}</small>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+
+		</div>
+	</div>
+</div>
+{% endblock content %}

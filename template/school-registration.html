@@ -1,0 +1,39 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+
+<div class="container3">
+	<div class="edit-pro">
+	  <form method="POST">
+	    {% csrf_token %}
+
+		  <label for="name">Name:</label>
+      <input type="text" name="name" id="name"/>
+		  <label for="uname">Username:</label>
+      <input type="text" name="username" id="uname"/>
+		  <label for="email">Email:</label>
+      <input type="email" name="email" id="email"/>
+		  <label for="num">Phone Number::</label>
+		  <input type="number" name="phone_num" id="num">
+		  <label for="pass1">Password:</label>
+		  <input type="password" name="password1" id="pass1">
+		  <label for="pass2">Confirm Password:</label>
+		  <input type="password" name="password2" id="pass2">
+		  <label for="desc">Description:</label>
+		  <textarea id="desc" name="description" rows="12"></textarea>
+
+		  <label for="city">City:</label>
+      <input type="text" name="city" id="city"/>
+		  <label for="sub-city">Sub-City:</label>
+      <input type="text" name="sub_city" id="sub-city"/>
+
+		  <button name="submit">Submit</button>
+
+    </form>
+	</div>
+
+</div>
+
+
+{% endblock %}

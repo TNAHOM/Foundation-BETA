@@ -1,0 +1,45 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="exam">
+	<h2>Profile</h2>
+	<h4>Role: {{user}}</h4>
+	<h4>Name: {{user.name}}</h4>
+	<h4>Email: {{user.email}}</h4>
+	<h4>Class Grade: {{user.class_grade}}</h4>
+
+	<div class="">
+		<div class="teach">
+		<div class="teach-list">
+			<div class="">
+				<div>
+					<table>
+						<thead>
+							<tr>
+								<td>Subject</td>
+								<td>Score</td>
+								<td>Checked_by</td>
+							</tr>
+						</thead>
+						<tbody>
+						{% for score in score %}
+							<tr>
+								<td>{{ score.subject.subject }}</td>
+								<td>{{ score.score }}</td>
+								<td>{{ score.checked_by }}</td>
+							</tr>
+						{% endfor %}
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+		<!--		SEARCH-->
+		</div>
+	</div>
+	</div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+
+<div class="exam account">
+	<h1>{{ user.name }}</h1>
+
+	<div class="account-body">
+
+		{% if page == 'School Administrator' %}
+		<div class="social">
+			<h4>Social-Media:</h4>
+			<div class="social-acc">
+				{% if user.website %}
+					<a href="{{user.website}}" target="_blank">
+						<button class="social-btn">Website</button>
+					</a>
+				{% endif %}
+
+				{% if user.facebook %}
+					<a href="{{user.facebook}}" target="_blank"> facebook</a>
+				{% endif %}
+
+				{% if user.twitter %}
+					<a href="{{user.twitter}}" target="_blank"> Twitter</a>
+				{% endif %}
+
+				{% if user.linkedin %}
+					<a href="{{user.linkedin}}" target="_blank"> Linkedin</a>
+				{% endif %}
+
+				{% if user.Instagram %}
+					<a href="{{user.Instagram}}" target="_blank"> Instagram</a>
+				{% endif %}
+			</div>
+		</div>
+		{% endif %}
+
+		<div class="edit">
+			<a class="btn btn-warning" href="{% url 'edit-school-account' user.id%}">
+				<button class="edit-btn">Edit</button>
+			</a>
+			<a class="btn btn-warning" href="{% url 'profile-school' user.id %}">
+				<button class="pro"> View Profile </button>
+			</a>
+
+			<a class="btn btn-warning" href="{% url 'change-password' %}">
+				<button class="reset"> Reset Password </button>
+			</a>
+		</div>
+	</div>
+
+
+
+</div>
+
+{% endblock %}

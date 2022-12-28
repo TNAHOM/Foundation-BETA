@@ -1,0 +1,98 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %} Home {% endblock title %}
+
+{% block content %}
+
+
+	<div class="container3">
+		<main>
+			<header>
+				<h2>Welcome, {{teacher.name}}</h2>
+				<div class="register-btn">
+					<a href="{% url 'create-exam' %}">
+						<button type="button" class="btn"> Register Exam </button>
+					</a>
+				</div>
+			</header>
+
+			<div class="insights">
+				<div class="total student">
+					<span class="material-icons-sharp"> school </span>
+					<div class="middle">
+						<h2>Students</h2>
+						<h1>{{ student.count}}</h1>
+					</div>
+				</div>
+
+				<div class="total teacher">
+					<span class="material-icons-sharp"> supervisor_account </span>
+					<div class="middle">
+						<h2>Average Result</h2>
+						<h1>33</h1>
+					</div>
+				</div>
+
+				<div class="total parent">
+					<span class="material-icons-sharp"> person </span>
+					<div class="middle">
+						<h2>Top students</h2>
+						<h1>10</h1>
+					</div>
+				</div>
+			</div>
+
+			<div class="stats">
+<!--						STUDENT LIST-->
+				<div>
+					<h2>Students</h2>
+					<table>
+						<thead>
+						<tr>
+							<th scope="col">Name</th>
+							<th scope="col">Class</th>
+							<th scope="col">Section</th>
+							<th scope="col">Sex</th>
+						</tr>
+						</thead>
+						<tbody>
+
+						{% for student in student %}
+						{% if student.class_grade == teacher.class_grade %}
+						<tr>
+							<td>{{ student.name }}</td>
+							<td>{{ student.class_grade }}</td>
+							<td>{{ student.section }}</td>
+							<td>{{ student.sex }}</td>
+
+						</tr>
+						{% endif %}
+						{% endfor %}
+
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+
+		</main>
+
+		<div class="right">
+	<!--			EXAM-->
+			<div class="card mt-2">
+					<div class="card-header p-0">
+						Upcoming Exam
+					</div>
+					{% for exam in exam %}
+							<div class="card-body p-0">
+								<span class="card-title" style="font-size:15px"><b>{{exam.subject}}</b> ---
+									<a href="{% url 'upcoming-exam' exam.id%}" class="card-text text-decoration-none" style="font-size:12px">{{exam.date}}</a>
+								</span>
+							</div>
+					{% endfor %}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
