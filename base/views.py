@@ -117,9 +117,11 @@ def register_school(request):
 			form = RegisterSchool(request.POST)
 			if form.is_valid():
 				submit = form.save(commit=False)
-				submit.role = request.user.role
+				submit.role = 'School Administrator'
 				submit.save()
 				return redirect('superuser', request.user.id)
+			else:
+				print(form.errors)
 	else:
 		return redirect('administrator', request.user.id)
 	
@@ -227,7 +229,7 @@ def create_exam(request):
 	
 	if request.method=='POST':
 		form = CreateExam(request.POST)
-
+		print(request.POST)
 		if form.is_valid():
 			squashed = squash(request.POST)
 			# print(request.POST['truefalse_answer4'], '----------')

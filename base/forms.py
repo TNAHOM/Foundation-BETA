@@ -26,10 +26,10 @@ class CreateExam(forms.ModelForm):
 class RegisterSchool(UserCreationForm):
 	class Meta:
 		model = School
-		fields = ['name', 'username', 'email' ,'phone_num', 'password1', 'password2', 'description', 'city', 'sub_city']
+		fields = ['name', 'username', 'email' ,'phone_number', 'password1', 'password2', 'description', 'city', 'sub_city']
 
 		
 class EditAccountSchool(forms.ModelForm):
 	class Meta:
 		model = School
-		fields = ['username', 'email', 'class_grade', 'phone_num', 'description', 'website', 'facebook', 'twitter', 'Instagram', 'linkedin']
+		fields = ['username', 'email', 'class_grade', 'phone_number', 'description', 'website', 'facebook', 'twitter', 'Instagram', 'linkedin']

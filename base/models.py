@@ -60,7 +60,7 @@ class User(AbstractUser):
 
 class School(User):
 	class_grade = MultiSelectField(choices=CLASS_GRADE, max_length=10, max_choices=4)
-	phone_num = models.IntegerField()
+	phone_number = models.IntegerField(null=True, blank=True)
 	description = models.TextField()
 	registered = models.DateTimeField(auto_now_add=True)
 	city = models.CharField(max_length=255, null=True, blank=True)
@@ -105,7 +105,7 @@ class Student(User):
 
 	
 class Teacher(User):
-	phone_num = models.IntegerField()
+	phone_number = models.IntegerField(null=True, blank=True)
 	school_name = models.ForeignKey(School, on_delete=models.SET_NULL, null=True, blank=True)
 	subject = models.CharField(max_length=100, choices=SUBJECT, default='ENG')
 	class_grade = models.IntegerField()
@@ -122,9 +122,9 @@ class Exam(models.Model):
 	teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE,null=True, blank=True, related_name='teacher')
 	unique_name = models.CharField(max_length=255, unique=True, null=False, blank=False)
 	subject = models.CharField(max_length=20, choices=SUBJECT, default='ENG')
-	choose_answer = models.CharField(max_length=300, null=False, blank=False)
-	truefalse_answer = models.CharField(max_length=50, null=False, blank=False)
-	fillblank_answer = models.CharField(max_length=512, null=False, blank=False)
+	choose_answer = models.CharField(max_length=3000, null=False, blank=False)
+	truefalse_answer = models.CharField(max_length=500, null=False, blank=False)
+	fillblank_answer = models.CharField(max_length=1028, null=False, blank=False)
 	no_of_questions = models.IntegerField(null=False, blank=False)
 	created = models.DateTimeField(auto_now_add=True)
 	start_time = models.DateTimeField(null=False, blank=False)
