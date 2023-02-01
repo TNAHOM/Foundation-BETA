@@ -1,3 +1,4 @@
+import qrcode
 
 def squash(dicts):
 	true_f = []
@@ -13,3 +14,11 @@ def squash(dicts):
 				choose.append(y)
 	return true_f, fill, choose
 
+def generate_qrcode(subject):
+	qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, border=0, box_size=4)
+	
+	qr.add_data(subject)
+	qr.make(fit=True)
+	
+	img = qr.make_image()
+	return img

@@ -142,7 +142,6 @@ class Score(models.Model):
 	student_score = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='student_score')
 	subject = models.ForeignKey(Exam, on_delete=models.CASCADE)
 	score = models.IntegerField()
-	checked_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=False, related_name='checkedby')
 	display = models.BooleanField(default=False)
 	
 	def __str__(self):

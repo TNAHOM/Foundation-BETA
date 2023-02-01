@@ -1,0 +1,128 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="teach">
+	<div class="teach-list">
+		<div class="teach-lists">
+			<div class="teach-res">
+				<h2>Grade 12</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Score</th>
+							<th>Section</th>
+						</tr>
+					</thead>
+					<tbody>
+					{% for score in score %}
+					{% if score.student_score.class_grade == 12 %}
+					<tr>
+						<td>{{ score.student_score.name }}</td>
+						<td>{{ score.score }}</td>
+						<td>{{ score.student_score.section }}</td>
+					</tr>
+					{% endif %}
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+
+			<div class="teach-res">
+				<h2>Grade 11</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Score</th>
+							<th>Section</th>
+						</tr>
+					</thead>
+					<tbody>
+					{% for score in score %}
+					{% if score.student_score.class_grade == 11 %}
+					<tr>
+						<td>{{ score.student_score.name }}</td>
+						<td>{{ score.score }}</td>
+						<td>{{ score.student_score.section }}</td>
+					</tr>
+					{% endif %}
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+
+			<div class="teach-res">
+				<h2>Grade 10</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Score</th>
+							<th>Section</th>
+						</tr>
+					</thead>
+					<tbody>
+					{% for score in score %}
+					{% if score.student_score.class_grade == 10 %}
+					<tr>
+						<td>{{ score.student_score.name }}</td>
+						<td>{{ score.score }}</td>
+						<td>{{ score.student_score.section }}</td>
+					</tr>
+					{% endif %}
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+
+			<div class="teach-res">
+				<h2>Grade 9</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Score</th>
+							<th>Section</th>
+						</tr>
+					</thead>
+					<tbody>
+					{% for score in score %}
+					{% if score.student_score.class_grade == 9 %}
+					<tr>
+						<td>{{ score.student_score.name }}</td>
+						<td>{{ score.score }}</td>
+						<td>{{ score.student_score.section }}</td>
+					</tr>
+					{% endif %}
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+<!--		SEARCH-->
+		<div class="teach-search">
+			<table>
+				<h2>Search by:</h2>
+				<thead>
+					<tr>
+						<td>Teachers</td>
+						<td>Subject</td>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr>
+						<td><input type="search" placeholder="Search.."/></td>
+						<td><input type="search" placeholder="Search.."/></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

@@ -64,8 +64,7 @@
 						<input type="radio" name="choose_answer{{num}}" id="E" value="E"/>
 					</div>
 					<div>
-						<label for="none" class="">X</label>
-						<input type="radio" name="none{{num}}" id="none"/>
+						<input type="button" value="X" onclick="clearSelection('choose_answer{{num}}');"/>
 					</div>
 				</div>
 				{% endfor %}
@@ -78,13 +77,18 @@
 				</div>
 				<div class="options-tf">
 					<div>
-						<input type="radio" name="truefalse_answer{{num}}" id="true" value="true">
 						<label for="true">True</label>
+						<input type="radio" name="truefalse_answer{{num}}" id="true" value="true">
 					</div>
 					<div>
-						<input type="radio" name="truefalse_answer{{num}}" id="false" value="false">
 						<label for="false">false</label>
+						<input type="radio" name="truefalse_answer{{num}}" id="false" value="false">
 					</div>
+
+					<div>
+						<input type="button" name="X{{num}}" id="X" value="X" onclick="clearSelection('choose_answer{{num}}');"/>
+					</div>
+
 				</div>
 				{% endfor %}
 			</div>

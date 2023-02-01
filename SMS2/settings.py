@@ -80,14 +80,25 @@ WSGI_APPLICATION = 'SMS2.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'railway',
+# 	      'USER': 'postgres',
+# 	      'PASSWORD': '7YmF4BrHp45egGHjAvXF',
+# 	      'HOST': 'containers-us-west-23.railway.app',
+# 	      'PORT': '8051'
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
 	      'USER': 'postgres',
-	      'PASSWORD': '7YmF4BrHp45egGHjAvXF',
-	      'HOST': 'containers-us-west-23.railway.app',
-	      'PORT': '8051'
+	      'PASSWORD': '243313',
+	      'HOST': 'localhost',
+	      'PORT': '5432'
     }
 }
 

@@ -6,10 +6,12 @@ from .forms import RegisterTeacher, RegisterStudent, \
 	CreateExam, RegisterSchool, EditAccountSchool
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
-from .utilities import squash
+from .utilities import squash, generate_qrcode
 from django.db.models import Q
 
 from .decorater import allowed_user
+from docxtpl import DocxTemplate, InlineImage
+from django.http import HttpResponse
 
 
 def handler404(request, exception):
@@ -221,10 +223,18 @@ def login_page(request):
 		
 	return render(request, 'login1.html')
 
+def redirect_httpresponse(url, content_type, status_code=None):
+	response = HttpResponse(content_type=content_type)
+	response['Content-Disposition'] = f'attachment; filename=nj.docx'
+	if status_code is not None:
+		response.status_code = status_code
+	response['Location'] = url
+	return response
+
 def create_exam(request):
 	school = School.objects.get(email=request.user.teacher.school_name)
 	form = CreateExam()
-	max_choose = 150
+	max_choose = 80
 	max_truefalse_blank = 10
 	
 	if request.method=='POST':
@@ -247,8 +257,26 @@ def create_exam(request):
 			submit.choose_answer = squashed[2]
 			submit.truefalse_answer = squashed[0]
 			submit.save()
+			print(submit.id)
+			
+			name_img = request.POST['unique_name']
+			# document = Document()
+			generate_qrcode(submit.id).save(f'doc_qrcode/qrcode/{name_img}.png')
+			doc = DocxTemplate('doc_qrcode/AS - updated.docx')
+			
+			context = {
+				'subjectStr': 'Biology',
+				'qrcodeimg': InlineImage(doc, f'doc_qrcode/qrcode/{name_img}.png')
+			}
+			
+			doc.render(context)
+			response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+			response['Content-Disposition'] = f'attachment; filename={name_img}.docx'
+			doc.save(response)
 			messages.success(request, 'Exam amswer is successfully created')
-			return redirect('teacher', request.user.id)
+
+			return response
+			
 		else:
 			messages.error(request, form.errors)
 	
@@ -265,7 +293,6 @@ def grade_class(request):
 	context = {'school':school}
 	return render(request, 'grade_class.html', context)
 
-
 def student_list(request, pk):
 	school = School.objects.get(id=pk)
 	student = Student.objects.filter(Q(school_name__name__contains=school.name) | Q())
@@ -274,7 +301,6 @@ def student_list(request, pk):
 	context = {'student': student}
 	return render(request, 'student-list.html', context)
 
-
 def teacher_list(request, pk):
 	school = School.objects.get(id=pk)
 	teacher = Teacher.objects.filter(school_name__name=school.name)
@@ -282,10 +308,19 @@ def teacher_list(request, pk):
 	context = {'teacher': teacher}
 	return render(request, 'teacher-list.html', context)
 
-
 def exam_list(request, pk):
 	school = School.objects.get(id=pk)
 	exam = Exam.objects.filter(school_name__name=school.name)
 	
 	context = {'exam': exam}
 	return render(request, 'exam-list.html', context)
+
+def exam_result(request, pk):
+	teacher = Teacher.objects.get(id=pk)
+	x = Teacher.objects.all()
+	print(x)
+	score = Score.objects.filter(subject__teacher=teacher)
+	y = Score.objects.all()
+	print(y, 'score')
+	context = {'score': score}
+	return render(request, 'exam-result.html', context)

@@ -863,19 +863,21 @@ a {
 /* TEACHER-LISTS */
 .teach {
   width: 100%;
-  display: flex;
-  justify-content: start;
 }
 
 .teach-list{
   margin-top: 2rem;
-  width: 100%;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 69% 29%;
 }
 .teach-lists{
-  margin-top: 2rem;
   display: grid;
   grid-template-columns: 49% 49%;
-  gap: 2rem;
+  gap: 1rem;
+}
+.teach-res {
+
 }
 
 .teach table{
