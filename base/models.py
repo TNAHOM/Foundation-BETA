@@ -20,21 +20,6 @@ SUBJECT = [
 	('SAT', 'SAT'),
 	('Civics', 'CIV')
 ]
-CLASS_GRADE = [
-	(9, 9),
-	(10, 10),
-	(11, 11),
-	(12, 12)
-]
-SECTION = [
-	('A', 'A'),
-	('B', 'B'),
-	('C', 'C'),
-	('D', 'D'),
-	('E', 'E'),
-	('F', 'F'),
-	('G', 'G')
-]
 
 SEX = [
 	('M', 'Male'),
@@ -59,83 +44,68 @@ class User(AbstractUser):
 	REQUIRED_FIELDS = ['username', 'role']
 
 class School(User):
-	class_grade = MultiSelectField(choices=CLASS_GRADE, max_length=10, max_choices=4)
 	phone_number = models.IntegerField(null=True, blank=True)
 	description = models.TextField()
 	registered = models.DateTimeField(auto_now_add=True)
 	city = models.CharField(max_length=255, null=True, blank=True)
 	sub_city = models.CharField(max_length=255, null=True, blank=True)
 
-	# Bio-->Image
-
+	def __str__(self):
+		return self.name
 	class Meta:
 		pass
-	
-class Grade(models.Model):
+
+class ClassGrade(models.Model):
 	id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 	school = models.ForeignKey(School, on_delete=models.SET_NULL, null=True, blank=True)
-	grade = models.IntegerField()
+	class_grade = models.IntegerField()
+	section = models.CharField(max_length=255)
 	
 	def __str__(self):
-		return str(self.grade)
+		return f'{self.class_grade} -- {self.section} -- {self.school}'
 	
 	class Meta:
-		pass
-
-class Section(models.Model):
-	id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
-	school = models.ForeignKey(School, on_delete=models.SET_NULL, null=True, blank=True)
-	grade = models.ForeignKey(Grade, on_delete=models.SET_NULL, null=True)
-	section = models.CharField(max_length=1)
+		# cant have same school, class grade, section
+		unique_together = [['school', 'class_grade', 'section']]
 	
-	def __str__(self):
-		return f'{str(self.grade)}- {self.section}'
-	
-	class Meta:
-		pass
-
 class Student(User):
 	school_name = models.ForeignKey(School, on_delete=models.SET_NULL, null=True, blank=True)
-	class_grade = models.IntegerField()
-	section = models.CharField(max_length=1)
+	class_grade = models.ForeignKey(ClassGrade, on_delete=models.SET_NULL, null=True,blank=True)
 	sex = models.CharField(choices=SEX, max_length=6, default='M')
 	
 	class Meta:
 		pass
 
-	
+
 class Teacher(User):
-	phone_number = models.IntegerField(null=True, blank=True)
+	phone_number = models.BigIntegerField(null=True, blank=True)
 	school_name = models.ForeignKey(School, on_delete=models.SET_NULL, null=True, blank=True)
 	subject = models.CharField(max_length=100, choices=SUBJECT, default='ENG')
-	class_grade = models.IntegerField()
-	section = models.CharField(max_length=1)
 	sex = models.CharField(choices=SEX, max_length=6, default='M')
-
+	class_grade = models.ManyToManyField(ClassGrade, blank=True)
 	
 	class Meta:
 		pass
+
 
 class Exam(models.Model):
 	id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 	school_name = models.ForeignKey(School, on_delete=models.SET_NULL, null=True, blank=True)
 	teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE,null=True, blank=True, related_name='teacher')
 	unique_name = models.CharField(max_length=255, unique=True, null=False, blank=False)
-	subject = models.CharField(max_length=20, choices=SUBJECT, default='ENG')
 	choose_answer = models.CharField(max_length=3000, null=False, blank=False)
 	truefalse_answer = models.CharField(max_length=500, null=False, blank=False)
 	fillblank_answer = models.CharField(max_length=1028, null=False, blank=False)
-	no_of_questions = models.IntegerField(null=False, blank=False)
+	no_of_questions = models.IntegerField()
 	created = models.DateTimeField(auto_now_add=True)
-	start_time = models.DateTimeField(null=False, blank=False)
-	end_time = models.DateTimeField(null=False, blank=False)
+	start_time = models.DateTimeField()
 	
 	class Meta:
 		# add '-' this to make it ascending ;otherwise it's descending
 		ordering = ['-start_time']
 	
 	def __str__(self):
-		return f'{self.subject}, {self.unique_name}'
+		return f'{self.teacher.subject}, {self.unique_name}'
 	
 class Score(models.Model):
 	id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
@@ -143,7 +113,24 @@ class Score(models.Model):
 	subject = models.ForeignKey(Exam, on_delete=models.CASCADE)
 	score = models.IntegerField()
 	display = models.BooleanField(default=False)
+	finished = models.DateField(auto_now_add=True)
+	
+	class Meta:
+		ordering = ['finished']
 	
 	def __str__(self):
-		return f'{self.student_score} ---  {self.subject} --- {self.score}'
+		return f'{self.student_score} ---  {self.subject.teacher.subject} --- {self.score} --- {self.finished}'
 	
+	
+class Reports(models.Model):
+	id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+	user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+	description = models.TextField()
+	time = models.DateTimeField(auto_now_add=True)
+	seen = models.BooleanField(default=False)
+	
+	class Meta:
+		ordering = ['time']
+	
+	def __str__(self):
+		return f'{self.user.role} - {self.user.email} - {self.user.name} - {self.time}'

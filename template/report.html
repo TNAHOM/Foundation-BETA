@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="exam">
+	<h2>Report</h2>
+	<form method="POST">
+		{% csrf_token %}
+		<label for='report'>Description:</label>
+		<textarea name="report" id="report" rows="7"></textarea>
+		<button type="submit">REPORT</button>
+	</form>
+</div>
+
+{% endblock content %}

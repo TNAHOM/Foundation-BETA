@@ -48,8 +48,17 @@ body{
   color: var(--color-dark);
   overflow-x: hidden;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
-a, button {
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+a, button, input[type=button], input[type=submit] {
   cursor: pointer;
 }
 
@@ -220,7 +229,7 @@ main header{
   align-items: center;
 }
 
-main header .register-btn button {
+main header .register-btn button{
   background: var(--color-primary);
   padding: 1rem;
   border: 0;
@@ -274,7 +283,7 @@ main .insights .total .middle{
   display: flex;
   justify-content: center;
 }
-.stats table{
+.stats table, .exam table{
   margin-top: 1rem;
   background: var(--color-white);
   width: 100%;
@@ -283,12 +292,12 @@ main .insights .total .middle{
   text-align: center;
   box-shadow: var(--box-shadow);
 }
-.stats table tbody td{
+.stats table tbody td, .exam table tbody td{
   height: 2.4rem;
   border-bottom: 1px solid var(--color-light);
   color: var(--color-dark-variant);
 }
-.stats table tbody tr:last-child td {
+.stats table tbody tr:last-child td, .exam table tbody tr:last-child td {
   border: none;
 }
 
@@ -303,43 +312,34 @@ main .insights .total .middle{
 }
 
 /* ============ RIGHT ============*/
-.right {
-  margin-top: 1rem;
-  margin-right: 1rem;
-}
-.right .profile{
-  display: flex;
-  justify-content: end;
-  gap: 2rem;
-  text-align: right;
-}
-
-.right .profile .profile-photo img {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-}
-
-.right .announcements{
+.right .recent-updates {
   margin-top: 1rem;
 }
 
-.right .announcements .announce{
-  margin-top: 2rem;
+.right .updates a {
+  text-decoration: underline;
+  color: blue;
+}
+
+.right .recent-updates h2 {
+  margin-bottom: 1rem;
+}
+
+.right .recent-updates .updates {
   background: var(--color-white);
   padding: var(--padding-1);
   border-radius: var(--card-border-radius);
   box-shadow: var(--box-shadow);
 }
 
-.right .announcements .announce .announces{
-  display: grid;
-  grid-template-columns: 2.6rem auto;
-  gap: 1rem;
+.right .recent-updates .updates .update {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 1rem;
 }
-.right .announcements img{
-  width: 2.4rem;
+.right .unique {
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .mess{
@@ -378,7 +378,7 @@ main .insights .total .middle{
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
-.login-page  input {
+.login-page  input, .download select {
   font-family: "Roboto", sans-serif;
   outline: 0;
   width: 100%;
@@ -469,7 +469,7 @@ main .insights .total .middle{
 }
 
 .form_wrapper	.col_half {
-	width: 33%;
+	width: 45%;
 	float: left;
 }
 .form_wrapper	.input_field {
@@ -496,16 +496,27 @@ main .insights .total .middle{
   grid-template-columns: repeat(3, 1fr);
 }
 
-.form_wrapper	.text-input{
+.form_wrapper	.text-input, .exam-info .text-input{
   width: 100%;
   padding: 8px 10px 9px 35px;
   height: 35px;
   box-sizing: border-box;
   outline: none;
 }
-.form_wrapper	.text-input:hover, .form_wrapper	.text-input:focus  {
+.form_wrapper	.text-input:hover, .form_wrapper .text-input:focus,
+.exam-info .text-input:focus, .exam-info .text-input:hover  {
   border: 0px;
   background: var(--color-light);
+}
+
+.form_wrapper .col_grades{
+  display: flex;
+  margin-bottom: 1rem;
+}
+.col_grades label{
+  margin-right: 1.5rem;
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .form_wrapper .submit {
@@ -729,7 +740,6 @@ a {
   align-items: center;
 	background: #fff;
 	width: 80%;
-	max-width: 100%;
 	box-sizing: border-box;
 	padding: 25px;
 	margin: 8% auto 0;
@@ -766,49 +776,64 @@ a {
   grid-template-columns: 40% 30% 30%;
   margin: 2rem auto;
 }
-.exam .ans-choose{
-  position: relative;
+.exam .ans-choose, .ans-tf, .ans-fill{
   display: grid;
   grid-template-columns: 10% 90%;
 }
 
-.exam .options{
+.exam .options, .options-tf{
   position: relative;
   display: flex;
-  gap: 1.3rem;
-  margin-bottom: 0.4rem;
+  gap: 1rem;
+  margin-bottom: 0.2rem;
 }
 .exam .ans-tf{
-  display: grid;
-  grid-template-columns: 10% 90%;
   height: 30rem;
 }
 
-.ans-tf .options-tf{
-  display: flex;
-  gap: 1rem;
-}
-
-.exam .fill input{
+.exam .options-fill input{
   width: 95%;
   padding: 8px 8px 8px 15px;
   height: 35px;
   box-sizing: border-box;
   outline: none;
+  margin-bottom: 0.4rem;
 }
-.exam .fill input:hover, .fill input:focus  {
+.exam .options-fill input:hover, .options-fill input:focus  {
   border: 0px;
   background: var(--color-light);
 }
 
 /* ACCOUNT */
 .account {
-	width: 40%;
-	height: 250px;
+	width: 50%;
+	height: 80%;
 }
 
-.account-body{
+.account .detail-desc{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 1rem;
+  padding-top: 0.6rem;
+  padding-bottom: 0.8rem;
+}
 
+.detail-desc h3{
+  font-size: 12px
+}
+
+.account-body .desc{
+  margin-top: 2rem;
+}
+
+.account .grade {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.account .style{
+  display: flex;
 }
 
 .account .account-body .social {
@@ -817,6 +842,7 @@ a {
   margin: 1rem;
   gap: 2rem;
   align-items: center;
+  margin-top: 2rem;
 }
 
 .account .social-btn, button {
@@ -830,7 +856,7 @@ a {
   margin-top: 2rem;
   text-align: center;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
 
@@ -857,27 +883,47 @@ a {
 }
 .stu .stats{
   display: grid;
-  grid-template-columns: 31% 31% 31%;
+  grid-template-columns: repeat(2, 1fr);
+  width: 80%;
 }
 
 /* TEACHER-LISTS */
 .teach {
-  width: 100%;
+  width: 95%;
 }
 
 .teach-list{
   margin-top: 2rem;
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: 69% 29%;
+  width: 100%;
 }
 .teach-lists{
   display: grid;
   grid-template-columns: 49% 49%;
   gap: 1rem;
 }
-.teach-res {
-
+.teach-containers {
+  display: grid;
+  grid-template-columns: auto 10% 68% 10%;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.teach-top {
+  border-bottom: 1px;
+  border-left: 0px;
+  border-right: 0px;
+  border-top: 0px;
+  border-style: solid;
+}
+.teach-main{
+  border-left: 1px;
+  border-right: 1px;
+  border-bottom: 0px;
+  border-top: 0px;
+  border-style: solid;
+  padding-left: 0.5rem;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  gap: 1rem;
 }
 
 .teach table{
@@ -890,7 +936,7 @@ a {
 }
 
 .teach-search table{
-  padding: 1rem;
+  padding-top: 0.8rem;
   width: 100%;
 }
 
@@ -956,7 +1002,7 @@ a {
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
-.edit-pro  input, textarea {
+.edit-pro  input, textarea, .exam .conf-pass{
   font-family: "Roboto", sans-serif;
   outline: 0;
   width: 100%;
@@ -971,7 +1017,7 @@ a {
   cursor: pointer;
 }
 
-.edit-pro button{
+.edit-pro button, .register-class .btn{
   width: 100%;
   background: var(--color-primary);
   border: 0;
@@ -981,7 +1027,147 @@ a {
   font-size: 14px;
 }
 
-.edit-pro input:hover,.edit-pro textarea:hover, .edit-pro .form input:focus, .edit-pro textfield:focus {
+
+.edit-pro input:hover,.edit-pro textarea:hover, .edit-pro .form input:focus, .edit-pro textfield:focus,
+ .exam .conf-pass:hover{
   color: white;
   background: var(--color-info-dark);
+}
+
+.unique_name .btn, .ans-info input[type=button]{
+  padding: 0.5rem;
+  background: var(--color-warning);
+  border: none;
+  border-radius: var(--border-radius-1);
+}
+
+/** Register-class **/
+.register-class{
+  margin: 1rem;
+}
+.register-class h3{
+  text-align: center;
+  font-size: 1.75rem;
+}
+
+#class-form-list{
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  margin-top: 1rem;
+}
+#class-form-list input{
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  width: 2.5rem;
+  border: 0;
+  background: var(--color-light);
+  margin: 0 5px 10px;
+  padding: 5px;
+  box-sizing: border-box;
+  font-size: 14px;
+   -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
+.register-class .classes{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.register-class .buttons .btn{
+  width: 50%;
+  margin: 1rem;
+}
+
+.register-class .buttons{
+  display: flex;
+  justify-content: center;
+}
+.reg-class{
+  height: 250px;
+  width: 50%;
+}
+
+/* exam-result*/
+.download{
+  margin-top: 1.25rem;
+}
+
+.download .download_items label{
+  display: block;
+  margin-bottom: 0.8rem;
+}
+
+.download_cont{
+  margin: 1rem 0 1rem;
+}
+
+.download select {
+  margin: 0 0 10px;
+  padding: 10px;
+  font-size: 13px;
+}
+
+/* Exam-history */
+.exam h2{
+  text-align: center;
+  margin-bottom: 1rem;
+  margin-top: 0.6rem;
+}
+
+.exam .highlight_ans{
+  position: relative;
+  display: grid;
+  margin-bottom: 1rem;
+  grid-template-columns: 20% 40% 60%;
+  gap: 1.5rem;
+}
+
+.exam .highlight{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.highlight_ans .ans_area{
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.exam .stick {
+  position: absolute;
+}
+
+/* Report list*/
+.exam .report-cont{
+  margin: 2rem;
+}
+
+.exam .report-top{
+  display: flex;
+  justify-content: space-between;
+}
+
+.exam .report-top-name{
+  display: flex;
+  gap: 0.7rem;
+}
+
+.exam .report-cont .report{
+  margin: 0.5rem;
+  padding: 0.3rem;
+}
+
+.exam .report-cont .report p{
+  margin-left: 0.6rem;
+}
+
+.exam .report-cont .seen{
+  text-align: right;
 }

@@ -2,9 +2,10 @@
 
 {% block content %}
 
+{% if page == 'school' %}
 <div class="stu">
 	<div class="stats">
-		<div class="top-student">
+		<div>
 			<h2>Grade 12 Students</h2>
 			<table>
 				<thead>
@@ -15,16 +16,18 @@
 				</thead>
 				<tbody>
 				{% for student in student %}
+				{% if student.class_grade.class_grade == 12 %}
 					<tr>
 						<td>{{ student.name }}</td>
-						<td>{{ student.section }}</td>
+						<td>{{ student.class_grade.section }}</td>
 					</tr>
+				{% endif %}
 				{% endfor %}
 				</tbody>
 			</table>
 		</div>
 
-		<div class="top-student">
+		<div>
 			<h2>Grade 11 Students</h2>
 			<table>
 				<thead>
@@ -35,13 +38,134 @@
 				</thead>
 				<tbody>
 				{% for student in student %}
+				{% if student.class_grade.class_grade == 11 %}
+
 					<tr>
-						<td><a href="{% url 'profile' student.id%}">{{ student.name }}</a></td>
-						<td>{{ student.section }}</td>
+						<td>{{ student.name }}</td>
+						<td>{{ student.class_grade.section }}</td>
 					</tr>
+				{% endif %}
 				{% endfor %}
 				</tbody>
 			</table>
+		</div>
+
+	</div>
+
+</div>
+
+{% elif page == 'teacher' %}
+	<div class="container3">
+		<div class="exam">
+
+			<div class="top-student">
+				<h2>Grade 11 Students</h2>
+				<table>
+					<thead>
+						<tr>
+							<td>Full Name</td>
+							<td>Section</td>
+							<td>Sex</td>
+							<td>Exam Result</td>
+							<td>Exam Name</td>
+						</tr>
+					</thead>
+					<tbody>
+					{% for student in student %}
+					{% if student.class_grade.class_grade == 12 %}
+						{% for teacher_grade in teacher_grade %}
+						{% if student.class_grade == teacher_grade %}
+							<tr>
+								<td>{{ student.name }}</td>
+								<td>{{ student.class_grade.class_grade }}</td>
+								<td>{{ student.sex }}</td>
+								{% for score in score %}
+								{% if score.student_score.name == student.name %}
+								<td>{{ score.score }}</td>
+								<td>{{ score.subject.unique_name }}</td>
+								{% endif %}
+								{% endfor %}
+							</tr>
+						{% endif %}
+						{% endfor %}
+					{% endif %}
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+
+			<div class="top-student">
+				<h2>Grade 11 Students</h2>
+				<table>
+					<thead>
+						<tr>
+							<td>Full Name</td>
+							<td>Section</td>
+							<td>Sex</td>
+							<td>Exam Result</td>
+							<td>Exam Name</td>
+						</tr>
+					</thead>
+					<tbody>
+					{% for student in student %}
+					{% if student.class_grade.class_grade == 11 %}
+						{% for teacher_grade in teacher_grade %}
+						{% if student.class_grade == teacher_grade %}
+							<tr>
+								<td>{{ student.name }}</td>
+								<td>{{ student.class_grade.class_grade }}</td>
+								<td>{{ student.sex }}</td>
+								{% for score in score %}
+								{% if score.student_score.name == student.name %}
+								<td>{{ score.score }}</td>
+								<td>{{ score.subject.unique_name }}</td>
+								{% endif %}
+								{% endfor %}
+							</tr>
+						{% endif %}
+						{% endfor %}
+					{% endif %}
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+
+			<div class="top-student">
+				<h2>Grade 10 Students</h2>
+				<table>
+					<thead>
+						<tr>
+							<td>Full Name</td>
+							<td>Section</td>
+							<td>Sex</td>
+							<td>Exam Result</td>
+							<td>Exam Name</td>
+						</tr>
+					</thead>
+					<tbody>
+					{% for student in student %}
+					{% if student.class_grade.class_grade == 10 %}
+						{% for teacher_grade in teacher_grade %}
+						{% if student.class_grade == teacher_grade %}
+							<tr>
+								<td>{{ student.name }}</td>
+								<td>{{ student.class_grade.class_grade }}</td>
+								<td>{{ student.sex }}</td>
+								{% for score in score %}
+								{% if score.student_score.name == student.name %}
+								<td>{{ score.score }}</td>
+								<td>{{ score.subject.unique_name }}</td>
+								{% endif %}
+								{% endfor %}
+							</tr>
+						{% endif %}
+						{% endfor %}
+					{% endif %}
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+
 		</div>
 
 		<div class="teach-search">
@@ -66,4 +190,5 @@
 
 </div>
 
+{% endif %}
 {% endblock %}

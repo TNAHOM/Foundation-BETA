@@ -1,0 +1,34 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="exam reg-class">
+	<form method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+		<div class="register-class">
+			<h3>Register Class</h3>
+
+			<div id="class-form-list">
+				<div class="classes">
+					<div class="grade">
+						<label for="class">Class:</label>
+						<input type="number" id="class" name="class_grade"/>
+					</div>
+
+					<div class="grade">
+						<label for="sections">Number of Sections:</label>
+						<input type="number" id="sections" name="sec"/>
+					</div>
+				</div>
+			</div>
+
+			<div class="buttons">
+				<input type="submit" value="Register" class="btn"/>
+			</div>
+		</div>
+
+	</form>
+</div>
+
+
+{% endblock content %}

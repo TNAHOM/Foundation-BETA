@@ -1,5 +1,4 @@
 {% load static %}
-
 {% block content %}
 
 <aside>
@@ -9,7 +8,7 @@
 			<span class="material-symbols-sharp " > grid_view</span>
 			<h3>Dashboard</h3>
 		</a>
-		{% url 'student-list' user.id as url %}
+		{% url 'student-list-school' user.id as url %}
 		<a class="{% if request.path == url %}active{% endif %}" href="{{ url }}">
 			<span class="material-icons-sharp "> school </span>
 			<h3>Student</h3>
@@ -28,7 +27,8 @@
 			<span class="material-symbols-sharp "> insights</span>
 			<h3>Analysis</h3>
 		</a>
-		<a href="#">
+		{% url 'report' request.user.id as url %}
+		<a class="{% if request.path == url %}active{% endif %}" href="{{url}}">
 			<span class="material-symbols-sharp"> report_gmailerrorred</span>
 			<h3>Reports</h3>
 		</a>

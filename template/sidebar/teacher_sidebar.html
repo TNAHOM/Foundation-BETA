@@ -1,17 +1,22 @@
+{% load static %}
 {% block content %}
-
 
 <aside>
 	<div class="sidebar">
-		<a class="active" href="{% url 'teacher' user.id %}">
+		{% url 'teacher' user.id as url %}
+		<a class="{% if request.path == url %}active{% endif %}" href="{{ url }}">
 			<span class="material-symbols-sharp" > grid_view</span>
 			<h3>Dashboard</h3>
 		</a>
-		<a href="{% url 'student-list' user.id %}">
+
+		{% url 'student-list-teacher' user.id as url %}
+		<a class="{% if request.path == url %}active{% endif %}" href="{{ url}}">
 			<span class="material-icons-sharp"> school </span>
 			<h3>Student</h3>
 		</a>
-		<a href="{% url 'exam-result' user.id %}">
+
+		{% url 'exam-result' user.id as url %}
+		<a class="{% if request.path == url %}active{% endif %}" href="{{ url }}">
 			<span class="material-icons-sharp"> receipt_long </span>
 			<h3>Exam-result</h3>
 		</a>
@@ -19,7 +24,8 @@
 			<span class="material-symbols-sharp"> insights</span>
 			<h3>Analysis</h3>
 		</a>
-		<a href="#">
+		{% url 'report' request.user.id as url %}
+		<a class="{% if request.path == url %}active{% endif %}" href="{{url}}">
 			<span class="material-symbols-sharp"> report_gmailerrorred</span>
 			<h3>Reports</h3>
 		</a>

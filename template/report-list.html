@@ -1,0 +1,34 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="container3">
+	<div class="exam">
+		<h2>Reports</h2>
+
+		{% for report in reports %}
+		<div class="report-cont">
+			<div class="report-top">
+				<div class="report-top-name">
+					<h3>{{forloop.counter}}</h3>
+					<h3>{{ report.user.name }}({{ report.user.role }})</h3>
+				</div>
+				<p>{{ report.time }}</p>
+			</div>
+			<div class="report">
+				<h4>Report:</h4>
+				<p>{{report.description}}</p>
+			</div>
+			<form method="POST">
+				{% csrf_token %}
+				<div class="seen">
+					<button type="submit" name="seen" value="{{report.id}}">Seen</button>
+				</div>
+			</form>
+		</div>
+		{% endfor %}
+
+	</div>
+</div>
+
+{% endblock content %}

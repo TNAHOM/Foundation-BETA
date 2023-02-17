@@ -16,9 +16,12 @@ def squash(dicts):
 
 def generate_qrcode(subject):
 	qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, border=0, box_size=4)
-	
 	qr.add_data(subject)
 	qr.make(fit=True)
 	
 	img = qr.make_image()
 	return img
+
+def remove_stuff(original, removed):
+	chosen = original.translate({ord(letter): None for letter in f"{removed}"})
+	return chosen

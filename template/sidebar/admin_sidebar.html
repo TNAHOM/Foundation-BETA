@@ -14,7 +14,8 @@
 			<span class="material-symbols-sharp "> insights</span>
 			<h3>Analysis</h3>
 		</a>
-		<a href="#">
+		{% url 'report-list' as url %}
+		<a class="{% if request.path == url %}active{% endif %}" href="{{url}}">
 			<span class="material-symbols-sharp"> report_gmailerrorred</span>
 			<h3>Reports</h3>
 		</a>

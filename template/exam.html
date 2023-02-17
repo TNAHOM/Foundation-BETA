@@ -1,7 +1,6 @@
 {% extends 'main.html' %}
 
 {% block content %}
-
 <form method="POST" class="exam" xmlns="http://www.w3.org/1999/html">
 	{% csrf_token %}
 	<main>
@@ -24,14 +23,21 @@
 			</div>
 
 			<div class="col-3">
+				<label for="grade">Class Grade:</label>
+				<select name="class" id="grade" class="text-input">
+					<option></option>
+					{% for grade in teacher.class_grade.all %}
+					{% ifchanged %}<option value="{{grade.class_grade}}">{{grade.class_grade}}</option>{% endifchanged %}
+					{% endfor %}
+				</select>
+			</div>
+
+			<div class="col-3">
 				<label for="sdate">Start Date And Time</label>
 				<input type="datetime-local" name="start_time" id="sdate" class="form-control" required/>
 			</div>
 
-			<div class="col-3">
-				<label for="edate">End Date And Time</label>
-				<input type="datetime-local" name="end_time" id="edate" class="form-control" required/>
-			</div>
+
 		</div>
 
 		<div class="ans-info">
@@ -39,7 +45,7 @@
 <!--				<h4>Choose:</h4>-->
 				{% for num in max_choose %}
 				<div class="num">
-					{{num}}
+					{{forloop.counter}}
 				</div>
 				<div class="options">
 					<div>
@@ -73,7 +79,7 @@
 			<div class="ans-tf">
 				{% for num in max_truefalse_blank %}
 				<div class="num">
-					{{ num }})
+					{{forloop.counter}}
 				</div>
 				<div class="options-tf">
 					<div>
@@ -86,7 +92,7 @@
 					</div>
 
 					<div>
-						<input type="button" name="X{{num}}" id="X" value="X" onclick="clearSelection('choose_answer{{num}}');"/>
+						<input type="button" name="X{{num}}" id="X" value="X" onclick="clearSelection('truefalse_answer{{num}}');"/>
 					</div>
 
 				</div>
@@ -95,13 +101,12 @@
 
 			<div class="">
 				<h3>Fill</h3>
-				<div class="ans-tf">
+				<div class="ans-fill">
 					{% for num in max_truefalse_blank %}
-
-					<div class="">
-						<label for="fill">{{ num }})</label>
+					<div class="num">
+						<label for="fill">{{forloop.counter}}</label>
 					</div>
-					<div class="fill">
+					<div class="options-fill">
 						<input type="text" id='fill' name="fillblank_answer{{num}}" class="form-control">
 					</div>
 

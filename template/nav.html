@@ -38,9 +38,15 @@
 					<span class="material-symbols-sharp"> logout</span>
 					<h4>Logout</h4>
 				</a>
-				<a href="{% url 'account' request.user.id %}">
+				{% if request.user.role == 'School Administrator' %}
+				<a href="{% url 'account-school' request.user.id %}">
 					<span class="material-symbols-sharp"> account_circle</span>
 				</a>
+				{% elif request.user.role == 'Teacher' %}
+				<a href="{% url 'account-teacher' request.user.id %}">
+					<span class="material-symbols-sharp"> account_circle</span>
+				</a>
+				{% endif %}
 
 				{% endif %}
 			</div>

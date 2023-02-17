@@ -3,10 +3,32 @@
 {% block content %}
 
 <div>
-	<h3>{{ exam.subject }}</h3>
-	<h4>Exam date: {{ exam.date }}</h4>
-	<h4>Number of questions: {{ exam.questions }}</h4>
-	<h4>Descriptions: {{ exam.description }}</h4>
+	<div class="exam">
+		<table>
+			<thead>
+			<tr>
+				<th>Unique Name</th>
+				<th>Number of questions</th>
+				<th>Created</th>
+				<th>Exam date</th>
+				<th>Detail</th>
+			</tr>
+
+			</thead>
+
+			<tbody>
+			{% for exam in exam %}
+				<tr>
+					<td>{{ exam.unique_name }}</td>
+					<td>{{ exam.no_of_questions }}</td>
+					<td>{{ exam.created.date }}</td>
+					<td>{{ exam.start_time.date }}</td>
+					<td><a href="{% url 'exam-detail' exam.id %}">Detail</a></td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
 
 </div>
 

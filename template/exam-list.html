@@ -2,10 +2,10 @@
 
 {% block content %}
 
-<div class="teach">
-	<div class="teach-list">
-		<div>
-			<div class="teach-tab">
+<div class="container3">
+	<div class="exam">
+		<div class="teach-list">
+			<div>
 				<h2>Grade 12</h2>
 				<table>
 					<thead>
@@ -17,19 +17,18 @@
 					</thead>
 					<tbody>
 					{% for exam in exam %}
-					{% if exam.teacher.class_grade == 12 %}
+
 					<tr>
 						<td>{{ exam.teacher.name }}</td>
-						<td>{{ exam.subject }}</td>
-						<td>{{ exam.start_time }}</td>
+						<td>{{ exam.teacher.subject }}</td>
+						<td>{{ exam.start_time.date }}</td>
 					</tr>
-					{% endif %}
 					{% endfor %}
 					</tbody>
 				</table>
 			</div>
 
-			<div class="teach-tab">
+			<div>
 				<h2>Grade 11</h2>
 				<table>
 					<thead>
@@ -41,7 +40,7 @@
 					</thead>
 					<tbody>
 					{% for exam in exam %}
-					{% if exam.teacher.class_grade == 11 %}
+					{% if exam.teacher.class_grade.class_grade == 11 %}
 					<tr>
 						<td>{{ exam.teacher.name }}</td>
 						<td>{{ exam.subject }}</td>
@@ -52,9 +51,10 @@
 					</tbody>
 				</table>
 			</div>
+
 		</div>
-<!--		SEARCH-->
-		<div class="teach-search">
+	</div>
+	<div class="teach-search">
 			<table>
 				<h2>Search by:</h2>
 				<thead>
@@ -72,7 +72,7 @@
 				</tbody>
 			</table>
 		</div>
-	</div>
+
 </div>
 
 

@@ -22,7 +22,7 @@
 					<span class="material-icons-sharp"> school </span>
 					<div class="middle">
 						<h2>Students</h2>
-						<h1>{{ student.count}}</h1>
+						<h1>{{ stu_num }}</h1>
 					</div>
 				</div>
 
@@ -59,15 +59,17 @@
 						<tbody>
 
 						{% for student in student %}
-						{% if student.class_grade == teacher.class_grade %}
-						<tr>
-							<td>{{ student.name }}</td>
-							<td>{{ student.class_grade }}</td>
-							<td>{{ student.section }}</td>
-							<td>{{ student.sex }}</td>
+						{% for teacher_grade in teacher_grade %}
+							{% if student.class_grade == teacher_grade %}
+							<tr>
+								<td>{{ student.name }}</td>
+								<td>{{ student.class_grade.class_grade }}</td>
+								<td>{{ student.class_grade.section }}</td>
+								<td>{{ student.sex }}</td>
 
-						</tr>
-						{% endif %}
+							</tr>
+							{% endif %}
+						{% endfor %}
 						{% endfor %}
 
 						</tbody>
@@ -80,17 +82,21 @@
 
 		<div class="right">
 	<!--			EXAM-->
-			<div class="card mt-2">
-					<div class="card-header p-0">
-						Upcoming Exam
+			<div class="recent-updates">
+				<h2>Exam-History</h2>
+				<div class="updates">
+				{% for exam in exam %}
+					<div class="update">
+						<div class="unique">
+							{{ exam.unique_name }}
+						</div>
+						<div>
+							<small class="text-muted">{{ exam.start_time.date }}</small>
+						</div>
 					</div>
-					{% for exam in exam %}
-							<div class="card-body p-0">
-								<span class="card-title" style="font-size:15px"><b>{{exam.subject}}</b> ---
-									<a href="{% url 'upcoming-exam' exam.id%}" class="card-text text-decoration-none" style="font-size:12px">{{exam.date}}</a>
-								</span>
-							</div>
-					{% endfor %}
+				{% endfor %}
+					<a href="{% url 'upcoming-exam' %}">See in detail</a>
+				</div>
 			</div>
 		</div>
 	</div>

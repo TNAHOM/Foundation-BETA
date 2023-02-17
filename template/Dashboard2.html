@@ -10,6 +10,9 @@
 
 			<h2>Welcome, {{ school.name }}</h2>
 			<div class="register-btn">
+				<a href="{% url 'register-class' request.user.id%}">
+					<button type="button" class="btn">Register Class</button>
+				</a>
 				<a href="{% url 'register-student' %}">
 					<button type="button" class="btn">Register Student</button>
 				</a>
@@ -59,11 +62,16 @@
 					<tbody>
 					{% for student in student %}
 						<tr>
-							<td>{{ student.class_grade }}</td>
+							<td>{{ student.class_grade.class_grade }}</td>
 							<td>{{ student.name }}</td>
-							<td>{{ student.section }}</td>
+							<td>{{ student.class_grade.section }}</td>
 						</tr>
 					{% endfor %}
+						<tr>
+							<td><a href="{% url 'student-list-school' school.id %}">
+								MORE...
+							</a></td>
+						</tr>
 					</tbody>
 				</table>
 			</div>

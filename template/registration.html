@@ -51,24 +51,39 @@
 	        </div>
 
 	        <div class="row clearfix">
+		        {% if page == 'Teacher' %}
             <div class="col_half">
-              <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
-	              <input type="text" class="text-input" id="grade" name="class_grade" placeholder="Grade">
-              </div>
+		            {% for lists in classGrade2 %}
+		            <div>
+		              <input type="checkbox" name="class_grade" value="{{lists.id}}">{{lists}}
+		            </div>
+		            {% endfor %}
+
             </div>
 	          <div class="col_half">
-              <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
-	              {% if page == 'Student' %}
-                <input type="text" class="text-input" name="section" placeholder="Section" />
-
-	              {% elif page == 'Teacher' %}
-								<div class="input_field select_option">
-			            {{ form.subject}}
-		              <div class="select_arrow"></div>
-	              </div>
-	              {% endif %}
+							<div class="input_field select_option">
+		            {{ form.subject}}
+	              <div class="select_arrow"></div>
               </div>
+	          </div>
+		        {% elif page == 'Student' %}
+		        <div class="col_half col_grades">
+		          <label for="grades"> Grade: </label>
+							<select id="grades" class="text-input" name="class_grade">
+								{% for forms in classGrade %}
+								% ifchanged %}<option>{{{forms.class_grade}}</option>{% endifchanged %}
+								{% endfor %}
+							</select>
             </div>
+		        <div class="col_half col_grades">
+		          <label for="section"> Grade: </label>
+							<select id="section" class="text-input" name="section">
+								{% for forms in classGrade %}
+								<option>{% ifchanged %} {{forms.section}} {% endifchanged %}</option>
+								{% endfor %}
+							</select>
+            </div>
+		        {% endif %}
           </div>
 
           <input class="submit" type="submit" value="Register" />

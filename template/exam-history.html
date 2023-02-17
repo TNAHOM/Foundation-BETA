@@ -1,0 +1,50 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div>
+	<div class="exam">
+		<h2>{{ exam.unique_name }} ({{ exam.teacher.subject }})</h2>
+		<div class="highlight">
+			<h3>Number of questions: <span class="text-muted">{{ exam.no_of_questions }}</span></h3>
+			<h3>Created: <span class="text-muted">{{ exam.created.date }}</span></h3>
+			<h3>Start Date: <span class="text-muted">{{ exam.start_time.date }}</span></h3>
+		</div>
+		<hr>
+		<div>
+			<h2>Answer</h2>
+			<div class="highlight_ans">
+				<div>
+					<h3>True or False</h3>
+					<div class="ans_area">
+					{% for x in tf_ans %}
+						<p class="text-mute ans_area">{{forloop.counter}}, {{x}}</p>
+					{% endfor %}
+					</div>
+				</div>
+				<div>
+					<h3>Choose</h3>
+					<div class="ans_area">
+						{% for x in choose_ans %}
+						<p class="text-mute">{{forloop.counter}}, {{x}}</p>
+						{% endfor %}
+						{% endfor %}
+					</div>
+				</div>
+				<div>
+					<h3>Fill in the blank</h3>
+					<div class="ans_area stick">
+						{% for x in fill_ans %}
+						<p class="text-mute">{{forloop.counter}}, {{x}}</p>
+						{% endfor %}
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+{% endblock %}

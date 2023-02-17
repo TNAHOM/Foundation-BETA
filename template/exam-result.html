@@ -2,125 +2,75 @@
 
 {% block content %}
 
-<div class="teach">
-	<div class="teach-list">
-		<div class="teach-lists">
-			<div class="teach-res">
-				<h2>Grade 12</h2>
-				<table>
-					<thead>
-						<tr>
-							<th>Name</th>
-							<th>Score</th>
-							<th>Section</th>
-						</tr>
-					</thead>
-					<tbody>
-					{% for score in score %}
-					{% if score.student_score.class_grade == 12 %}
-					<tr>
-						<td>{{ score.student_score.name }}</td>
-						<td>{{ score.score }}</td>
-						<td>{{ score.student_score.section }}</td>
-					</tr>
-					{% endif %}
-					{% endfor %}
-					</tbody>
-				</table>
+<div class="container3">
+	<div class="teach">
+		<h3>To Download the result please click the unique name buttons!!</h3>
+		<div class="teach-containers teach-top">
+			<h2>Unique Name</h2>
+			<h2>Date</h2>
+			<div class="teach-main">
+				<h3>Name</h3>
+				<h3>Score</h3>
+				<h3>Section</h3>
 			</div>
-
-			<div class="teach-res">
-				<h2>Grade 11</h2>
-				<table>
-					<thead>
-						<tr>
-							<th>Name</th>
-							<th>Score</th>
-							<th>Section</th>
-						</tr>
-					</thead>
-					<tbody>
-					{% for score in score %}
-					{% if score.student_score.class_grade == 11 %}
-					<tr>
-						<td>{{ score.student_score.name }}</td>
-						<td>{{ score.score }}</td>
-						<td>{{ score.student_score.section }}</td>
-					</tr>
-					{% endif %}
-					{% endfor %}
-					</tbody>
-				</table>
-			</div>
-
-			<div class="teach-res">
-				<h2>Grade 10</h2>
-				<table>
-					<thead>
-						<tr>
-							<th>Name</th>
-							<th>Score</th>
-							<th>Section</th>
-						</tr>
-					</thead>
-					<tbody>
-					{% for score in score %}
-					{% if score.student_score.class_grade == 10 %}
-					<tr>
-						<td>{{ score.student_score.name }}</td>
-						<td>{{ score.score }}</td>
-						<td>{{ score.student_score.section }}</td>
-					</tr>
-					{% endif %}
-					{% endfor %}
-					</tbody>
-				</table>
-			</div>
-
-			<div class="teach-res">
-				<h2>Grade 9</h2>
-				<table>
-					<thead>
-						<tr>
-							<th>Name</th>
-							<th>Score</th>
-							<th>Section</th>
-						</tr>
-					</thead>
-					<tbody>
-					{% for score in score %}
-					{% if score.student_score.class_grade == 9 %}
-					<tr>
-						<td>{{ score.student_score.name }}</td>
-						<td>{{ score.score }}</td>
-						<td>{{ score.student_score.section }}</td>
-					</tr>
-					{% endif %}
-					{% endfor %}
-					</tbody>
-				</table>
-			</div>
-
+			<h2>Grade</h2>
 		</div>
-<!--		SEARCH-->
-		<div class="teach-search">
-			<table>
-				<h2>Search by:</h2>
-				<thead>
-					<tr>
-						<td>Teachers</td>
-						<td>Subject</td>
-					</tr>
-				</thead>
+		<div class="teach-containers">
+			{% for teacher_grades in teacher_grade %}
+				{% for score in score %}
+					{% if teacher_grades == score.student_score.class_grade %}
+						<div class="unique_name">
+							<h3>{{score.subject.unique_name}}</h3>
+						</div>
+						<div class="date">
+							<h3>{{ score.finished }}</h3>
+						</div>
+						<div class="teach-main">
+							<h3>{{ score.student_score.name }}</h3>
+							<h3>{{ score.score }}</h3>
+							<h3>{{ score.student_score.class_grade.section }}</h3>
+						</div>
+						<div class="grade">
+							<h3>{{ score.student_score.class_grade.class_grade }}</h3>
+						</div>
+					{% endif %}
+				{% endfor %}
 
-				<tbody>
-					<tr>
-						<td><input type="search" placeholder="Search.."/></td>
-						<td><input type="search" placeholder="Search.."/></td>
-					</tr>
-				</tbody>
-			</table>
+			{% endfor %}
 		</div>
+	</div>
+
+	<div class="download">
+		<h2>Download by</h2>
+		<form method="POST">
+			{% csrf_token %}
+			<div class="">
+				<div class="download_cont">
+					<div class="download_items">
+						<label for="unique_name">Unique Name:</label>
+						<select id="unique_name" name="unique_name">
+							<option></option>
+							{% for exam_name in exam_names %}
+							<option>{{exam_name.unique_name}}</option>
+							{% endfor %}
+						</select>
+					</div>
+
+					<div class="download_items">
+						<label for="class">Class:</label>
+						<select id="class" name="class_grade">
+							<option></option>
+							{% for teacher_grade in teacher_grade %}
+							<option value="{{teacher_grade.id}}">{{teacher_grade.class_grade}} {{teacher_grade.section}}</option>
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+				<div>
+					<button type="submit">DOWNLOAD</button>
+				</div>
+			</div>
+		</form>
 	</div>
 </div>
 

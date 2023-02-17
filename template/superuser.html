@@ -5,7 +5,7 @@
 <div class="container3">
 	<main>
 		<header>
-			<h2>Welcome, {{user.name}}</h2>
+			<h2>Welcome, {{user.username}}</h2>
 			<div class="register-btn">
 				<a href="{% url 'register-school' %}">
 					<button type="button"> Register School </button>
@@ -70,8 +70,24 @@
 			</div>
 		</div>
 	</main>
-	<div class="col-sm-2">
-
+	<div class="right">
+<!--			EXAM-->
+		<div class="recent-updates">
+			<h2>Reports</h2>
+			<div class="updates">
+			{% for report in reports %}
+				<div class="update">
+					<div class="unique">
+						{{ report.user.role }}
+					</div>
+					<div>
+						<small class="text-muted">{{ report.time.date }}</small>
+					</div>
+				</div>
+			{% endfor %}
+				<a href="{% url 'report-list' %}">See in detail</a>
+			</div>
+		</div>
 	</div>
 </div>
 

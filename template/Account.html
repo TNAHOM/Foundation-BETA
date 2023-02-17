@@ -4,46 +4,108 @@
 
 
 <div class="exam account">
-	<h1>{{ user.name }}</h1>
+	<h1>{{ request.user.name }}</h1>
 
 	<div class="account-body">
+		<div class="detail-desc">
 
-		{% if page == 'School Administrator' %}
+			{% if request.user.role == 'School Administrator' %}
+			<div class="style">
+				<h3>Phone number: </h3>
+				<p>{{school.phone_number}}</p>
+			</div>
+			<div class="style">
+				<h3>Email: </h3>
+				<p>{{school.email}}</p>
+			</div>
+			<div class="style">
+				<h3>City: </h3>
+				<p>{{school.city}}</p>
+			</div>
+			<div class="style">
+				<h3>Sub-city: </h3>
+				<p>{{school.sub_city}}</p>
+			</div>
+			<div class="style">
+				<h3>Registered date: </h3>
+				<p>{{school.registered.date}}</p>
+			</div>
+			{% elif request.user.role == 'Teacher' %}
+			<div class="style">
+				<h3>School name: </h3>
+				<p>{{teacher.school_name}}</p>
+			</div>
+			<div class="style">
+				<h3>Phone number: </h3>
+				<p>{{teacher.phone_number}}</p>
+			</div>
+			<div class="style">
+				<h3>Email: </h3>
+				<p>{{teacher.email}}</p>
+			</div>
+			<div class="style">
+				<h3>Sex: </h3>
+				<p>{{teacher.sex}}</p>
+			</div>
+			<div class="style">
+				<h3>Subject: </h3>
+				<p>{{teacher.subject}}</p>
+			</div>
+			{% endif %}
+		</div>
+
+		{% if request.user.role == 'School Administrator' %}
+		<div class="desc">
+			<h3>Description:</h3><p>{{school.description}}</p>
+		</div>
+		{% endif %}
+
+		{% if request.user.role == 'Teacher' %}
+		<div class="grade">
+			<h3>Class grade:</h3>
+			{% for grade in teacher.class_grade.all%}
+				<p>{{grade.class_grade }}{{grade.section}}</p>
+			{% endfor %}
+		</div>
+		{% endif %}
+
 		<div class="social">
-			<h4>Social-Media:</h4>
+			<h3>Social-Media:</h3>
 			<div class="social-acc">
-				{% if user.website %}
-					<a href="{{user.website}}" target="_blank">
+				{% if school.website %}
+					<a href="{{school.website}}" target="_blank">
 						<button class="social-btn">Website</button>
 					</a>
 				{% endif %}
 
-				{% if user.facebook %}
-					<a href="{{user.facebook}}" target="_blank"> facebook</a>
+				{% if school.facebook %}
+					<a href="{{school.facebook}}" target="_blank"> facebook</a>
 				{% endif %}
 
-				{% if user.twitter %}
-					<a href="{{user.twitter}}" target="_blank"> Twitter</a>
+				{% if school.twitter %}
+					<a href="{{school.twitter}}" target="_blank"> Twitter</a>
 				{% endif %}
 
-				{% if user.linkedin %}
-					<a href="{{user.linkedin}}" target="_blank"> Linkedin</a>
+				{% if school.linkedin %}
+					<a href="{{school.linkedin}}" target="_blank"> Linkedin</a>
 				{% endif %}
 
-				{% if user.Instagram %}
-					<a href="{{user.Instagram}}" target="_blank"> Instagram</a>
+				{% if school.Instagram %}
+					<a href="{{school.Instagram}}" target="_blank"> Instagram</a>
 				{% endif %}
 			</div>
 		</div>
-		{% endif %}
 
 		<div class="edit">
-			<a class="btn btn-warning" href="{% url 'edit-school-account' user.id%}">
-				<button class="edit-btn">Edit</button>
+			{% if request.user.role == 'School Administrator' %}
+			<a class="btn btn-warning" href="{% url 'edit-school-account' school.id%}">
+				<button class="pro">Edit</button>
 			</a>
-			<a class="btn btn-warning" href="{% url 'profile-school' user.id %}">
-				<button class="pro"> View Profile </button>
+			{% elif request.user.role == 'Teacher' %}
+			<a class="btn btn-warning" href="{% url 'edit-teacher-account' teacher.id%}">
+				<button class="pro">Edit</button>
 			</a>
+			{% endif %}
 
 			<a class="btn btn-warning" href="{% url 'change-password' %}">
 				<button class="reset"> Reset Password </button>
