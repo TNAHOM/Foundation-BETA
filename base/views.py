@@ -3,10 +3,7 @@ from .models import User, Exam, Score, Teacher, Student, School, ClassGrade, Rep
 from django.contrib.auth.decorators import login_required
 from .forms import CreateExam, EditAccountSchool, EditAccountTeacher
 from django.contrib import messages
-<<<<<<< HEAD
 from .utilities import squash, exam_code
-=======
->>>>>>> parent of 16ee675 (Removed the qrcode and exam code added)
 from .utilities import squash, generate_qrcode
 from django.db.models import Q
 from .utilities import remove_stuff
