@@ -50,7 +50,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-		"corsheaders.middleware.CorsMiddleware",
 		'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -101,23 +100,23 @@ WSGI_APPLICATION = 'SMS2.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase',
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'postgres',
-# 	      'USER': 'postgres',
-# 	      'PASSWORD': '243313',
-# 	      'HOST': 'localhost',
-# 	      'PORT': '5432'
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
+	      'USER': 'postgres',
+	      'PASSWORD': '243313',
+	      'HOST': 'localhost',
+	      'PORT': '5432'
+    }
+}
 
 
 # Password validation
