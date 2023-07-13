@@ -57,7 +57,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 		"debug_toolbar.middleware.DebugToolbarMiddleware",
 		"whitenoise.middleware.WhiteNoiseMiddleware",
-
 ]
 
 AUTH_USER_MODEL = 'base.User'
