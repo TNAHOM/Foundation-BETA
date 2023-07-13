@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 import qrcode
-=======
 from random import randint
->>>>>>> 7b3158de0b2673f0792ebaded6099bdf918640f6
 
 import qrcode
 
