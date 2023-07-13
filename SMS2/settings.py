@@ -27,12 +27,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-INTERNAL_IPS = [
-    # ...
-    # "127.0.0.1",
-		"0.0.0.0"
-    # ...
-]
+# INTERNAL_IPS = [
+#     # ...
+#     # "127.0.0.1",
+# 		"0.0.0.0"
+#     # ...
+# ]
 
 # Application definition
 
@@ -90,14 +90,21 @@ WSGI_APPLICATION = 'SMS2.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'railway',
+# 	      'USER': 'postgres',
+# 	      'PASSWORD': '7YmF4BrHp45egGHjAvXF',
+# 	      'HOST': 'containers-us-west-23.railway.app',
+# 	      'PORT': '8051'
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-	      'USER': 'postgres',
-	      'PASSWORD': '7YmF4BrHp45egGHjAvXF',
-	      'HOST': 'containers-us-west-23.railway.app',
-	      'PORT': '8051'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
 
