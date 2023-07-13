@@ -1,4 +1,3 @@
-import qrcode
 from random import randint
 
 def squash(dicts):
@@ -26,14 +25,6 @@ def squash(dicts):
 	# print(ans_ch, 'choose')
 	return fill, ans_tf, ans_other, ans_ch
 
-def generate_qrcode(subject, side):
-	qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, border=0, box_size=3)
-	info = subject, side
-	qr.add_data(info)
-	qr.make(fit=True)
-	
-	img = qr.make_image()
-	return img
 
 def remove_stuff(original, removed):
 	chosen = original.translate({ord(letter): None for letter in f"{removed}"})
