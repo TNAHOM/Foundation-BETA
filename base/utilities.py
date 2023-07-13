@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 from random import randint
+=======
+>>>>>>> parent of 16ee675 (Removed the qrcode and exam code added)
 import qrcode
 
 def squash(dicts):

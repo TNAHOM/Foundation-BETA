@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+<<<<<<< HEAD
 
 # INTERNAL_IPS = [
 #     # ...
@@ -34,6 +35,8 @@ ALLOWED_HOSTS = ['*']
 # 		"0.0.0.0"
 #     # ...
 # ]
+=======
+>>>>>>> parent of 16ee675 (Removed the qrcode and exam code added)
 
 # Application definition
 
@@ -57,8 +60,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+<<<<<<< HEAD
 		"debug_toolbar.middleware.DebugToolbarMiddleware",
 		"whitenoise.middleware.WhiteNoiseMiddleware",
+=======
+>>>>>>> parent of 16ee675 (Removed the qrcode and exam code added)
 ]
 
 AUTH_USER_MODEL = 'base.User'
