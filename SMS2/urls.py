@@ -18,7 +18,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-		path('', include('base.urls'))
+		path('', include('base.urls')),
+		path('__debug__/', include('debug_toolbar.urls')),
 ]
 handler400 = 'base.views.handler400'
 handler403 = 'base.views.handler403'

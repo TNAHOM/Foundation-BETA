@@ -71,29 +71,35 @@
 
 		<div class="social">
 			<h3>Social-Media:</h3>
-			<div class="social-acc">
-				{% if school.website %}
+				{% if user.website %}
 					<a href="{{school.website}}" target="_blank">
 						<button class="social-btn">Website</button>
 					</a>
 				{% endif %}
 
-				{% if school.facebook %}
-					<a href="{{school.facebook}}" target="_blank"> facebook</a>
+				{% if user.facebook %}
+					<a href="{{school.facebook}}" target="_blank">
+						<button class="">Facebook</button>
+					</a>
 				{% endif %}
 
-				{% if school.twitter %}
-					<a href="{{school.twitter}}" target="_blank"> Twitter</a>
+				{% if user.twitter %}
+					<a href="{{school.twitter}}" target="_blank">
+					<button class="">Twitter</button>
+					</a>
 				{% endif %}
 
-				{% if school.linkedin %}
-					<a href="{{school.linkedin}}" target="_blank"> Linkedin</a>
+				{% if user.linkedin %}
+					<a href="{{school.linkedin}}" target="_blank">
+					<button class="">Linkedin</button>
+					</a>
 				{% endif %}
 
-				{% if school.Instagram %}
-					<a href="{{school.Instagram}}" target="_blank"> Instagram</a>
+				{% if user.Instagram %}
+					<a href="{{school.Instagram}}" target="_blank">
+						<button class="">Instagram</button>
+					</a>
 				{% endif %}
-			</div>
 		</div>
 
 		<div class="edit">

@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
-from .models import School, ClassGrade, Teacher, User, Reports
+from .models import School, ClassGrade, Teacher, User, Reports, Exam
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from .forms import RegisterTeacher, RegisterStudent, RegisterSchool
+from .forms import RegisterTeacher, RegisterStudent, RegisterSchool, CreateExam
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
-
+from .utilities import squash
 from .decorater import allowed_user
 
 
@@ -97,6 +97,7 @@ def register_class(request, pk):
 	school = School.objects.get(id=pk)
 	if request.method=='POST':
 		sections = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+		
 		for sec in range(int(request.POST.get('sec'))):
 			ClassGrade.objects.get_or_create(school=school, class_grade=request.POST.get('class_grade'),
 				section=sections[sec])
@@ -122,6 +123,7 @@ def change_password(request):
 	return render(request, 'change_password.html')
 
 def login_page(request):
+	print(request)
 	if request.method=='POST':
 		user = authenticate(
 			email=request.POST['email'],
@@ -140,6 +142,7 @@ def login_page(request):
 				return redirect('administrator', user.id)
 			else:
 				messages.error(request, 'You are not allowed here for the time being:)')
+			messages.success(request, 'Logged in as ')
 		else:
 			messages.error(request, 'Email or Password is incorrect')
 			return redirect('login')
@@ -147,6 +150,7 @@ def login_page(request):
 	return render(request, 'login1.html')
 
 def logout_user(request):
+	print(request)
 	logout(request)
 	return redirect('login')
 
@@ -163,3 +167,34 @@ def report(request, pk):
 			return redirect('teacher', user.id)
 
 	return render(request, 'report.html')
+
+def edit_exam(request, pk):
+	exam = Exam.objects.get(id=pk)
+	teacher = Teacher.objects.get(id=exam.teacher.id)
+	max_choose = 80
+	max_truefalse_blank = 10
+	
+	form = CreateExam(instance=exam)
+	if request.method == 'POST':
+		form = CreateExam(request.POST, instance=exam)
+		if form.is_valid():
+			# squash function - > will remove the number that was given in the template then converts all the radio input value to string
+			squashed = squash(request.POST)
+			submit = form.save(commit=False)
+			submit.fillblank_answer = squashed[1]
+			submit.choose_answer = squashed[2]
+			submit.truefalse_answer = squashed[0]
+			submit.save()
+			
+			messages.success(request, f'Exam {exam.unique_name} has been updated!!')
+			return redirect('upcoming-exam')
+		else:
+			print(form.errors)
+			messages.error(request, 'Error has occurred.Please try again!')
+			
+	context = {'form': form, 'teacher': teacher, 'max_choose': range(max_choose), 'max_truefalse_blank': range(max_truefalse_blank)}
+	return render(request, 'edit_exam.html', context)
+
+def delete_exam(request, pk):
+	Exam.objects.get(id=pk).delete()
+	return redirect('upcoming-exam')

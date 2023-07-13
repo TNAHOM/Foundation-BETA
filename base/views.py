@@ -3,7 +3,7 @@ from .models import User, Exam, Score, Teacher, Student, School, ClassGrade, Rep
 from django.contrib.auth.decorators import login_required
 from .forms import CreateExam, EditAccountSchool, EditAccountTeacher
 from django.contrib import messages
-from .utilities import squash, generate_qrcode
+from .utilities import squash, generate_qrcode, exam_code
 from django.db.models import Q
 from .utilities import remove_stuff
 
@@ -33,8 +33,7 @@ def teacher_page(request, pk):
 	student = Student.objects.filter(school_name__name = teacher.school_name.name).order_by('-class_grade__class_grade')
 	classG = ClassGrade.objects.filter(school=teacher.school_name)
 	exam = Exam.objects.filter(teacher=teacher)[:5]
-	print(dir(teacher_grade))
-	print(teacher_grade.fetch_all())
+	# print(dir(teacher_grade))
 	stu_num = 0
 	for stu in teacher_grade:
 		for stu_len in classG:
@@ -120,38 +119,56 @@ def edit_account_teacher(request, pk):
 	context = {'form': form, 'page': page}
 	return render(request, 'edit account/edit_school_form.html', context)
 
-
+@allowed_user(allowed_roles=['Teacher'])
 def create_exam(request):
 	teacher = Teacher.objects.get(id=request.user.id)
-	print(teacher.class_grade.all())
+	exam = Exam.objects.filter(school_name__name = teacher.school_name)
+	
+	exam_code_list = 0
+	for ex in exam:
+		print(str(ex.exam_code_f)[:-1])
+		exam_code_list+int(str(ex.exam_code_f)[:-1])
+		
+	# exam_code_list = [ex.exam_code_f[:-1] for ex in exam]
+
+	# print(teacher.class_grade.all())
 	form = CreateExam()
-	max_choose = 80
-	max_truefalse_blank = 10
+	max_choose = 100
+	max_ans = 10
 	
 	if request.method=='POST':
 		form = CreateExam(request.POST)
 		if form.is_valid():
+			# print('pre: ', request.POST)
+			# squash function - > will remove the number that was given in the template then converts all the radio input value to string
 			squashed = squash(request.POST)
+			examCode = exam_code(exam_code_list)
+
 			submit = form.save(commit=False)
 			submit.school_name = teacher.school_name
 			submit.teacher = request.user.teacher
 			submit.unique_name = request.POST['unique_name']
 			submit.start_time = request.POST['start_time']
-			submit.fillblank_answer = squashed[1]
-			submit.choose_answer = squashed[2]
-			submit.truefalse_answer = squashed[0]
+			submit.fillblank_answer = squashed[0]
+			submit.truefalse_answer = squashed[1]
+			submit.matching_answer = squashed[2]
+			submit.choose_answer = squashed[3]
+			submit.exam_code_f = examCode[0]
+			submit.exam_code_b = examCode[1]
 			submit.save()
-			
+			# print(squashed)
+			# print(request.POST)
 			name_img = request.POST['unique_name']
-			generate_qrcode(submit.id).save(f'doc_qrcode/qrcode/{name_img}.png')
-			doc = DocxTemplate('doc_qrcode/AS - updated.docx')
 			
+			doc = DocxTemplate('doc_qrcode/new_format v2.docx')
+
 			context = {
 				'subjectStr': teacher.subject,
-				'qrcodeimg': InlineImage(doc, f'doc_qrcode/qrcode/{name_img}.png'),
-				'class': request.POST['class']
+				'class': request.POST['class'],
+				'exam_code_f': examCode[0],
+				'exam_code_b': examCode[1],
 			}
-			
+
 			doc.render(context)
 			response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
 			response['Content-Disposition'] = f'attachment; filename={name_img}.docx'
@@ -163,7 +180,7 @@ def create_exam(request):
 		else:
 			messages.error(request, form.errors)
 	
-	context = {'teacher':teacher, 'form': form, 'max_choose':range(max_choose), 'max_truefalse_blank':range(max_truefalse_blank)}
+	context = {'teacher':teacher, 'form': form, 'max_choose':range(max_choose), 'max_ans':range(max_ans)}
 	return render(request, 'exam.html', context)
 
 def student_list_school(request, pk):
@@ -179,6 +196,7 @@ def student_list_teacher(request, pk):
 	teacher_grade = teacher.class_grade.all()
 	student = Student.objects.filter(school_name=teacher.school_name).order_by('class_grade__class_grade')
 	score = Score.objects.filter(student_score__school_name=teacher.school_name, subject__teacher=teacher)
+
 	exam = Exam.objects.filter(school_name=teacher.school_name, teacher=teacher)
 	# for x in exam:
 	# 	y = x.score_set.all()
@@ -207,13 +225,28 @@ def exam_list(request, pk):
 	return render(request, 'exam-list.html', context)
 
 def exam_result(request, pk):
+	# if in url their is no ?q= then display all or any value occur get that value
+	q = request.GET.get('q') if request.GET.get('q') is not None else ''
+	# print(q, 'll')
 	teacher = Teacher.objects.get(id=pk)
 	teacher_grade = teacher.class_grade.all()
-	exam_name = Exam.objects.filter(teacher=teacher)
-	score = Score.objects.filter(subject__teacher=teacher)
+	exam_name = Exam.objects.filter(teacher=teacher, )
+	score = Score.objects.filter(subject__teacher=teacher, id__contains=q)
+	
+	incorrect = {}
+	if q is not None:
+		for scores in score:
+			if scores.incorrect_ans is not None:
+				incorrect_ans = scores.incorrect_ans.translate({ord(x):None for x in '[] '}).split(',')
+				incorrect_que = scores.incorrect_ans_num.translate({ord(x):None for x in '[] '}).split(',')
+				for x in range(len(incorrect_ans)):
+					letter = {'A':0, 'B':1, 'C':2, 'D':3, 'E':4, 'F':5}
+					for key, value in letter.items():
+						if int(incorrect_ans[x]) == int(value):
+							# use this for the time being but for the next time correct it when the data is going to be saved
+							incorrect.update({incorrect_que[x]:key})
 
 	if request.method == 'POST':
-		print(request.POST)
 		unique_name = request.POST["unique_name"]
 		class_grade = request.POST['class_grade']
 		dwn_score = Score.objects.filter(subject__unique_name=unique_name, student_score__class_grade__id=class_grade)
@@ -221,13 +254,16 @@ def exam_result(request, pk):
 		response['Content-Disposition'] = f'attachment; filename={unique_name}.csv'
 
 		writer = csv.writer(response)
-		writer.writerow(['Name', 'Score', 'Grade', 'Section', 'Date', 'Unique Name'])
+		writer.writerow(['Name', 'Score', 'Grade', 'Section', 'Date', 'Unique Name', 'Incorrect Questions'])
 
 		for dwn in dwn_score:
 			exam_date = dwn.finished.strftime("%m/%d/%Y")
-			writer.writerow([dwn.student_score.name, dwn.score, dwn.student_score.class_grade.class_grade, dwn.student_score.class_grade.section, exam_date, dwn.subject.unique_name])
+			# print(dwn.incorrect_ans)
+			writer.writerow([dwn.student_score.name, dwn.score, dwn.student_score.class_grade.class_grade, dwn.student_score.class_grade.section,
+			                 exam_date, dwn.subject.unique_name, dwn.incorrect_ans_num])
 		return response
-	context = {'score': score, 'teacher_grade':teacher_grade, 'exam_names': exam_name}
+	context = {'score': score, 'teacher_grade':teacher_grade, 'exam_names': exam_name,
+	           'q': q, 'incorrect':incorrect}
 	return render(request, 'exam-result.html', context)
 
 def exam_detail(request, pk):
@@ -243,6 +279,7 @@ def exam_detail(request, pk):
 
 def upcoming_exam(request):
 	exam = Exam.objects.filter(teacher=request.user.id)
+
 	context = {'exam': exam}
 	return render(request, 'upcoming_exams.html', context)
 
@@ -251,9 +288,7 @@ def report_list(request):
 	if request.method == 'POST':
 		print(request.POST)
 		submit = Reports.objects.get(id=request.POST['seen'])
-		print(submit)
 		submit.seen = True
 		submit.save()
-		print(submit)
 		messages.success(request, f'Report removed from list({submit.user.name})')
 	return render(request, 'report-list.html', {'reports': reports})

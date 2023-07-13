@@ -20,6 +20,12 @@
 			<span class="material-icons-sharp"> receipt_long </span>
 			<h3>Exam-result</h3>
 		</a>
+
+		{% url 'upcoming-exam' as url %}
+		<a class="{% if request.path == url %}active{% endif %}" href="{{ url }}">
+			<span class="material-icons-sharp"> receipt_long </span>
+			<h3>Upcoming-exam</h3>
+		</a>
 		<a href="#">
 			<span class="material-symbols-sharp"> insights</span>
 			<h3>Analysis</h3>

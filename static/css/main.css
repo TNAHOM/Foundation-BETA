@@ -229,11 +229,15 @@ main header{
   align-items: center;
 }
 
-main header .register-btn button{
+main header .register-btn input{
   background: var(--color-primary);
   padding: 1rem;
   border: 0;
   border-radius: var(--border-radius-2);
+}
+
+main header .register-btn input[type='submit']{
+  background: var(--color-warning);
 }
 
 main .insights {
@@ -316,7 +320,7 @@ main .insights .total .middle{
   margin-top: 1rem;
 }
 
-.right .updates a {
+.right .updates a, .teach-main a {
   text-decoration: underline;
   color: blue;
 }
@@ -773,9 +777,10 @@ a {
   display:grid;
   width:100%;
   gap: 1rem;
-  grid-template-columns: 40% 30% 30%;
+  grid-template-columns: 35% 25% 40%;
   margin: 2rem auto;
 }
+
 .exam .ans-choose, .ans-tf, .ans-fill{
   display: grid;
   grid-template-columns: 10% 90%;
@@ -788,10 +793,26 @@ a {
   margin-bottom: 0.2rem;
 }
 .exam .ans-tf{
-  height: 30rem;
+  height: auto;
+}
+.exam .info-label h3{
+  margin-bottom: 1.5rem;
+  text-align: center
+  display: block;
+  width: 100%;
 }
 
-.exam .options-fill input{
+.exam .ans-match .list{
+  display: grid;
+  grid-template-columns: 10% 90%;
+  gap: 1.5rem;
+}
+.exam .ans-match .other{
+  width: 40px;
+  height: 25px;
+  padding: 8px;
+}
+.exam .options-fill input, .exam .ans-match input{
   width: 95%;
   padding: 8px 8px 8px 15px;
   height: 35px;
@@ -799,7 +820,7 @@ a {
   outline: none;
   margin-bottom: 0.4rem;
 }
-.exam .options-fill input:hover, .options-fill input:focus  {
+.exam .options-fill input:hover, .options-fill input:focus, .exam .ans-match input:hover, .exam .ans-match input:focus  {
   border: 0px;
   background: var(--color-light);
 }
@@ -831,6 +852,7 @@ a {
   display: flex;
   gap: 0.4rem;
 }
+}
 
 .account .style{
   display: flex;
@@ -843,6 +865,10 @@ a {
   gap: 2rem;
   align-items: center;
   margin-top: 2rem;
+}
+
+.social social-acc{
+  display: flex;
 }
 
 .account .social-btn, button {
@@ -922,7 +948,7 @@ a {
   border-style: solid;
   padding-left: 0.5rem;
   display: grid;
-  grid-template-columns: 33% 33% 33%;
+  grid-template-columns: 35% 19% 19% 25%;
   gap: 1rem;
 }
 
@@ -1095,6 +1121,22 @@ a {
 /* exam-result*/
 .download{
   margin-top: 1.25rem;
+}
+
+.download .more-detail{
+  margin-top: 1.6rem;
+}
+
+.download .display-ans{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+  margin-top: 0.7rem;
+}
+
+.download .display-ans h3{
+  font-size: 13px;
+  font-weight: 500px;
 }
 
 .download .download_items label{
