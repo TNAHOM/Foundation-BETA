@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['*']
 #     # ...
 # ]
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -46,7 +47,6 @@ INSTALLED_APPS = [
 		'base',
 		'multiselectfield',
 		'active_link',
-		"debug_toolbar",
 ]
 
 MIDDLEWARE = [

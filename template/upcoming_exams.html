@@ -12,40 +12,18 @@
 				<th>Created</th>
 				<th>Exam date</th>
 				<th>Detail</th>
-				<th>Edit answer</th>
-				<th>Delete Exam</th>
 			</tr>
 
 			</thead>
 
 			<tbody>
-
-			{% for exams in exam %}
+			{% for exam in exam %}
 				<tr>
-
-					<td>{{ exams.unique_name }}</td>
-					<td>{{ exams.no_of_questions }}</td>
-					<td>{{ exams.created }}</td>
-					{% now 'm/d/Y' as date_edit %}
-					<td>{{ exams.start_time }}</td>
-					<td><a href="{% url 'exam-detail' exams.id %}">Detail</a></td>
-					{% if exams.start_time|date:"SHORT_DATE_FORMAT" > date_edit%}
-					<td>
-						<form method="POST">
-							{% csrf_token %}
-							<button type="submit">
-								<a href="{% url 'edit-exam' exams.id %}">Edit</a>
-							</button>
-
-						</form>
-					</td>
-
-					<td>
-						<a href="{% url 'delete-exam' exams.id %}">Delete</a>
-					</td>
-					{% else %}
-					<td>Passed</td>
-					{% endif %}
+					<td>{{ exam.unique_name }}</td>
+					<td>{{ exam.no_of_questions }}</td>
+					<td>{{ exam.created.date }}</td>
+					<td>{{ exam.start_time.date }}</td>
+					<td><a href="{% url 'exam-detail' exam.id %}">Detail</a></td>
 				</tr>
 			{% endfor %}
 			</tbody>

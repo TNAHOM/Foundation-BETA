@@ -46,7 +46,7 @@ class User(AbstractUser):
 class School(User):
 	phone_number = models.IntegerField(null=True, blank=True)
 	description = models.TextField()
-	registered = models.DateField(auto_now_add=True)
+	registered = models.DateTimeField(auto_now_add=True)
 	city = models.CharField(max_length=255, null=True, blank=True)
 	sub_city = models.CharField(max_length=255, null=True, blank=True)
 
@@ -79,7 +79,7 @@ class Student(User):
 
 class Teacher(User):
 	phone_number = models.BigIntegerField(null=True, blank=True)
-	school_name = models.ForeignKey(School, on_delete=models.SET_NULL, null=True)
+	school_name = models.ForeignKey(School, on_delete=models.SET_NULL, null=True, blank=True)
 	subject = models.CharField(max_length=100, choices=SUBJECT, default='ENG')
 	sex = models.CharField(choices=SEX, max_length=6, default='M')
 	class_grade = models.ManyToManyField(ClassGrade, blank=True)
@@ -90,18 +90,15 @@ class Teacher(User):
 
 class Exam(models.Model):
 	id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
-	school_name = models.ForeignKey(School, on_delete=models.SET_NULL, null=True)
-	teacher = models.ForeignKey(Teacher, on_delete=models.SET_NULL, null=True, related_name='teacher')
+	school_name = models.ForeignKey(School, on_delete=models.SET_NULL, null=True, blank=True)
+	teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE,null=True, blank=True, related_name='teacher')
 	unique_name = models.CharField(max_length=255, unique=True, null=False, blank=False)
-	exam_code_f = models.IntegerField(null=True, blank=False, unique=True)
-	exam_code_b = models.IntegerField(null=True, blank=False, unique=True)
-	choose_answer = models.CharField(max_length=3000, null=True, blank=True)
-	truefalse_answer = models.CharField(max_length=1028, null=True, blank=True)
-	fillblank_answer = models.CharField(max_length=1028, null=True, blank=True)
-	matching_answer = models.CharField(max_length=1028, null=True, blank=True)
+	choose_answer = models.CharField(max_length=3000, null=False, blank=False)
+	truefalse_answer = models.CharField(max_length=500, null=False, blank=False)
+	fillblank_answer = models.CharField(max_length=1028, null=False, blank=False)
 	no_of_questions = models.IntegerField()
-	created = models.DateField(auto_now_add=True)
-	start_time = models.DateField()
+	created = models.DateTimeField(auto_now_add=True)
+	start_time = models.DateTimeField()
 	
 	class Meta:
 		# add '-' this to make it ascending ;otherwise it's descending
@@ -114,15 +111,9 @@ class Score(models.Model):
 	id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 	student_score = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='student_score')
 	subject = models.ForeignKey(Exam, on_delete=models.CASCADE)
-	score_exam_code_f = models.IntegerField(null=True, blank=True)
-	score_exam_code_b = models.IntegerField(null=True, blank=True)
 	score = models.IntegerField()
 	display = models.BooleanField(default=False)
 	finished = models.DateField(auto_now_add=True)
-	incorrect_ans = models.CharField(max_length=1000, null=True, blank=True)
-	incorrect_ans_num = models.CharField(max_length=1000, null=True, blank=True)
-	disqualified_ans = models.CharField(max_length=1000, null=True, blank=True)
-	disqualified_ans_num = models.CharField(max_length=1000, null=True, blank=True)
 	
 	class Meta:
 		ordering = ['finished']

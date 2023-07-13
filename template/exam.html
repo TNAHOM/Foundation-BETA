@@ -6,10 +6,8 @@
 	<main>
 		<header>
 			<h2>Create Exam Answer</h2>
-<!--			<button onclick="countChecked()">Counted</button>-->
-
 			<div class="register-btn">
-				<input onclick="countChecked()" type="button" id="btn" class="btn" value="CHECK ANSWER">
+				<button type="submit" class="btn">SUBMIT</button>
 			</div>
 		</header>
 
@@ -36,97 +34,75 @@
 
 			<div class="col-3">
 				<label for="sdate">Start Date And Time</label>
-				<input type='date' name="start_time" id="sdate" class="form-control" required/>
+				<input type="datetime-local" name="start_time" id="sdate" class="form-control" required/>
 			</div>
 
 
 		</div>
 
 		<div class="ans-info">
-
-			<div class="info-label">
-				<h3>Choose</h3>
-				<div class="ans-choose">
-	<!--				<h4>Choose:</h4>-->
-					{% for num in max_choose %}
-					<div class="num">
-						{{forloop.counter}}
-					</div>
-					<div class="options">
-						<div>
-							<label for="A">A</label>
-							<input type="radio" name="ans_ch{{num}}" id="A" value="A"/>
-						</div>
-						<div>
-							<label for="B" class="">B</label>
-							<input type="radio" name="ans_ch{{num}}" id="B" value="B"/>
-						</div>
-						<div>
-							<label for="C" class="">C</label>
-							<input type="radio" name="ans_ch{{num}}" id="C" value="C"/>
-						</div>
-
-						<div>
-							<label for="D" class="">D</label>
-							<input type="radio" name="ans_ch{{num}}" id="D" value="D"/>
-						</div>
-						<div>
-							<label for="E" class="">E</label>
-							<input type="radio" name="ans_ch{{num}}" id="E" value="E"/>
-						</div>
-
-						<div>
-							<input type="button" value="X" onclick="clearSelection('ans_ch{{num}}', 'other{{num}}');"/>
-						</div>
-					</div>
-					{% endfor %}
+			<div class="ans-choose">
+<!--				<h4>Choose:</h4>-->
+				{% for num in max_choose %}
+				<div class="num">
+					{{forloop.counter}}
 				</div>
-			</div>
-
-			<div class="info-label">
-				<h3>True or False</h3>
-				<div class="ans-tf">
-					{% for num in max_ans %}
-					<div class="num">
-						{{forloop.counter}}
+				<div class="options">
+					<div>
+						<label for="A">A</label>
+						<input type="radio" name="choose_answer{{num}}" id="A" value="A"/>
 					</div>
-					<div class="options-tf">
-						<div>
-							<label for="true">True</label>
-							<input type="radio" name="ans_tf{{num}}" id="true" value="true">
-						</div>
-						<div>
-							<label for="false">false</label>
-							<input type="radio" name="ans_tf{{num}}" id="false" value="false">
-						</div>
-
-						<div>
-							<input type="button" name="X{{num}}" id="X" value="X" onclick="clearSelection('truefalse_answer{{num}}');"/>
-						</div>
-
+					<div>
+						<label for="B" class="">B</label>
+						<input type="radio" name="choose_answer{{num}}" id="B" value="B"/>
 					</div>
-					{% endfor %}
-					<div class="info-label">
-						<h3>Matching(A-J)</h3>
-						<div class="ans-match">
-							{% for num in max_ans %}
-							<div class="list">
-								<div class="num">{{forloop.counter}}</div>
-								<div>
-									<label for="O"></label>
-									<input type="text" name="other{{num}}" class="other" id="O" maxlength="1"/>
-								</div>
-							</div>
-							{% endfor %}
-						</div>
+					<div>
+						<label for="C" class="">C</label>
+						<input type="radio" name="choose_answer{{num}}" id="C" value="C"/>
+					</div>
+
+					<div>
+						<label for="D" class="">D</label>
+						<input type="radio" name="choose_answer{{num}}" id="D" value="D"/>
+					</div>
+					<div>
+						<label for="E" class="">E</label>
+						<input type="radio" name="choose_answer{{num}}" id="E" value="E"/>
+					</div>
+					<div>
+						<input type="button" value="X" onclick="clearSelection('choose_answer{{num}}');"/>
 					</div>
 				</div>
+				{% endfor %}
 			</div>
 
-			<div class="info-label">
-				<h3>Fill in the blank</h3>
+			<div class="ans-tf">
+				{% for num in max_truefalse_blank %}
+				<div class="num">
+					{{forloop.counter}}
+				</div>
+				<div class="options-tf">
+					<div>
+						<label for="true">True</label>
+						<input type="radio" name="truefalse_answer{{num}}" id="true" value="true">
+					</div>
+					<div>
+						<label for="false">false</label>
+						<input type="radio" name="truefalse_answer{{num}}" id="false" value="false">
+					</div>
+
+					<div>
+						<input type="button" name="X{{num}}" id="X" value="X" onclick="clearSelection('truefalse_answer{{num}}');"/>
+					</div>
+
+				</div>
+				{% endfor %}
+			</div>
+
+			<div class="">
+				<h3>Fill</h3>
 				<div class="ans-fill">
-					{% for num in max_ans %}
+					{% for num in max_truefalse_blank %}
 					<div class="num">
 						<label for="fill">{{forloop.counter}}</label>
 					</div>
@@ -138,51 +114,7 @@
 				</div>
 			</div>
 		</div>
-			</div>
 	</main>
 </form>
-
-<script>
-function countChecked() {
-  var count = 0;
-  var radioButtons = document.querySelectorAll('input[type="radio"]');
-  const inputTexts = document.querySelectorAll("input[type='text'][class='" + 'other' + "']");
-  var number_of_que = document.getElementById('total').value;
-  var get_fill = document.querySelectorAll('#fill');
-
-  for (var i=0; i < radioButtons.length; i++) {
-    if (radioButtons[i].checked) {
-      count++;
-    }
-  }
-
-  for (var i=0; i < get_fill.length; i++) {
-    if (get_fill[i].value.trim() !== '') {
-	    count++;
-    }
-  }
-  inputTexts.forEach((inputText) => {
-    if (inputText.value.trim() !== '') {
-      count++;
-    }
-  });
-
-  if (number_of_que == count){
-    var change_type = document.getElementById('btn').setAttribute('type', 'submit');
-    var change_value = document.getElementById('btn').setAttribute('value', 'SUBMIT');
-  } else {
-    var change_type = document.getElementById('btn').setAttribute('type', 'button');
-    var change_value = document.getElementById('btn').setAttribute('value', 'CHECK ANSWER');
-
-		<!--    Because number_of_que when empty doesn't return 0 or number-->
-		if (number_of_que == '') {
-      window.alert('The number of question is 0 but ' + count + ' answers was given')
-    } else {
-      window.alert('The number of question is ' + number_of_que + ' but ' + count + ' answers was given')
-    }
-  }
-
-}
-</script>
 
 {% endblock %}
