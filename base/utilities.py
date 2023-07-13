@@ -1,5 +1,4 @@
 import qrcode
-from random import randint
 
 import qrcode
 

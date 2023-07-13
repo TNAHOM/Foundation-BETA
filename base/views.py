@@ -3,8 +3,6 @@ from .models import User, Exam, Score, Teacher, Student, School, ClassGrade, Rep
 from django.contrib.auth.decorators import login_required
 from .forms import CreateExam, EditAccountSchool, EditAccountTeacher
 from django.contrib import messages
-from .utilities import squash
-
 from .utilities import squash, generate_qrcode
 from django.db.models import Q
 from .utilities import remove_stuff

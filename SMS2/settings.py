@@ -27,16 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-<<<<<<< HEAD
 
-=======
-# INTERNAL_IPS = [
-#     # ...
-#     # "127.0.0.1",
-# 		"0.0.0.0"
-#     # ...
-# ]
->>>>>>> 7b3158de0b2673f0792ebaded6099bdf918640f6
 # Application definition
 
 INSTALLED_APPS = [
@@ -52,18 +43,13 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-		'django.middleware.security.SecurityMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-<<<<<<< HEAD
-=======
-		"debug_toolbar.middleware.DebugToolbarMiddleware",
-		"whitenoise.middleware.WhiteNoiseMiddleware",
->>>>>>> 7b3158de0b2673f0792ebaded6099bdf918640f6
 ]
 
 AUTH_USER_MODEL = 'base.User'
@@ -102,13 +88,6 @@ WSGI_APPLICATION = 'SMS2.wsgi.application'
 # 	      'PASSWORD': '7YmF4BrHp45egGHjAvXF',
 # 	      'HOST': 'containers-us-west-23.railway.app',
 # 	      'PORT': '8051'
-#     }
-# }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
 
@@ -162,9 +141,6 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS =  [
 	BASE_DIR / 'static'
 ]
-
-MEDIA_ROOT = BASE_DIR / 'static/images'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
