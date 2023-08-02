@@ -1,1 +1,1 @@
-web: gunicorn SMS2.wsgi
+web: python manage.py migrate && gunicorn SMS2.wsgi
