@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 class RegisterStudent(UserCreationForm):
   class Meta:
     model = Student
-    fields = ['name', 'email', 'sex', 'password1', 'password2']
+    fields = ['name', 'email','sex', 'password1', 'password2']
     
 class RegisterTeacher(UserCreationForm):
   class Meta:
@@ -20,7 +20,7 @@ class CreateExam(forms.ModelForm):
 class RegisterSchool(UserCreationForm):
   class Meta:
     model = School
-    fields = ['name', 'email' ,'phone_number', 'password1', 'password2', 'description', 'city', 'sub_city']
+    fields = ['name', 'email','username' ,'phone_number', 'password1', 'password2', 'description', 'city', 'sub_city']
 
     
 class EditAccountSchool(forms.ModelForm):

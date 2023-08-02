@@ -26,6 +26,7 @@ def register_teacher(request):
 		print(form.errors)
 		if form.is_valid():
 			submit = form.save(commit=False)
+			submit.username = name
 			submit.role = page
 			submit.name = name
 			submit.school_name = school
@@ -35,7 +36,8 @@ def register_teacher(request):
 			for x in request.POST.getlist('class_grade'):
 				class_name = ClassGrade.objects.get(id=x)
 				teacher_name.class_grade.add(class_name)
-
+			
+			messages.error(request, f'{name}\'s account has been created')
 			return redirect('administrator', request.user.id)
 		else:
 			messages.error(request, 'An error has occurred')
@@ -56,6 +58,7 @@ def register_student(request):
 		print(add_classGrade)
 		if form.is_valid():
 			submit = form.save(commit=False)
+			submit.username = name
 			submit.role = page
 			submit.name = name
 			submit.school_name = school
@@ -84,7 +87,7 @@ def register_school(request):
 				submit.save()
 				return redirect('superuser', request.user.id)
 			else:
-				print(form.errors)
+				print(form.errors, '....')
 	else:
 		return redirect('administrator', request.user.id)
 	

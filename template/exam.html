@@ -120,6 +120,7 @@
 							{% endfor %}
 						</div>
 					</div>
+
 				</div>
 			</div>
 
@@ -141,6 +142,29 @@
 			</div>
 	</main>
 </form>
+<div id="inputContainer">
+<!-- Inputs will be added here -->
+</div>
+
+
+<!-- ... -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var addButton = document.getElementById("addButton");
+        var inputContainer = document.getElementById("inputContainer");
+        var inputCount = 0;
+
+        addButton.addEventListener("click", function() {
+            inputCount++;
+            var input = document.createElement("input");
+            input.type = "text";
+            input.name = "input_" + inputCount;
+            input.placeholder = "Input " + inputCount;
+            inputContainer.appendChild(input);
+        });
+    });
+</script>
+<!-- ... -->
 
 <script>
 function countChecked() {

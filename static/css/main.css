@@ -812,6 +812,10 @@ a {
   height: 25px;
   padding: 8px;
 }
+.exam .options-fill{
+  display: flex;
+  gap: 0.3rem;
+}
 .exam .options-fill input, .exam .ans-match input{
   width: 95%;
   padding: 8px 8px 8px 15px;
