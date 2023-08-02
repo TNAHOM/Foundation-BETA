@@ -27,7 +27,7 @@ DEBUG = True
 
 # ALLOWED_HOSTS = ['*']
 ALLOWED_HOSTS = ['foundation-beta-production.up.railway.app','127.0.0.1', 'www.school-wise.com', 'localhost']
-CSRF_TRUSTED_ORIGINS = ['https://foundation-beta-production.up.railway.app', '127.0.0.1', 'https://www.school-wise.com', 'localhost']
+CSRF_TRUSTED_ORIGINS = ['https://foundation-beta-production.up.railway.app', 'https://www.school-wise.com']
 
 
 # Application definition
