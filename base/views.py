@@ -198,9 +198,9 @@ def student_list_teacher(request, pk):
 	score = Score.objects.filter(student_score__school_name=teacher.school_name, subject__teacher=teacher)
 
 	exam = Exam.objects.filter(school_name=teacher.school_name, teacher=teacher)
-	# for x in exam:
-	# 	y = x.score_set.all()
-	# 	print(y)
+	for x in score:
+		y = x.subject.unique_name
+		print(type(y), y)
 	context = {'student': student, 'teacher_grade': teacher_grade,
 	           'page':page, 'exam':exam, 'score':score}
 	return render(request, 'student-list.html', context)

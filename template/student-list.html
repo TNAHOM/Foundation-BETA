@@ -66,8 +66,7 @@
 							<td>Full Name</td>
 							<td>Section</td>
 							<td>Sex</td>
-							<td>Exam Result</td>
-							<td>Exam Name</td>
+							<td>Student Id</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -79,12 +78,7 @@
 								<td>{{ student.name }}</td>
 								<td>{{ student.class_grade.class_grade }}</td>
 								<td>{{ student.sex }}</td>
-								{% for score in score %}
-								{% if score.student_score.name == student.name %}
-								<td>{{ score.score }}</td>
-								<td>{{ score.subject.unique_name }}</td>
-								{% endif %}
-								{% endfor %}
+								<td>{{ student.student_id }}</td>
 							</tr>
 						{% endif %}
 						{% endfor %}
