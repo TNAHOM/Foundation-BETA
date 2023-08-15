@@ -1,3 +1,5 @@
+import random
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from multiselectfield import MultiSelectField
@@ -72,9 +74,22 @@ class Student(User):
 	school_name = models.ForeignKey(School, on_delete=models.SET_NULL, null=True, blank=True)
 	class_grade = models.ForeignKey(ClassGrade, on_delete=models.SET_NULL, null=True,blank=True)
 	sex = models.CharField(choices=SEX, max_length=6, default='M')
+	student_id = models.IntegerField(null=True, blank=False, unique=True)
 	
 	class Meta:
 		pass
+	
+	def save(self, *args, **kwargs):
+		if not self.student_id:
+			self.generate_unique_student_id()
+		super().save(*args, **kwargs)
+	
+	def generate_unique_student_id(self):
+		unique_id = random.randint(1000, 99999)
+		while Student.objects.filter(student_id=unique_id).exists():
+			unique_id = random.randint(1000, 99999)
+		self.student_id = unique_id
+		self.save()
 
 
 class Teacher(User):
