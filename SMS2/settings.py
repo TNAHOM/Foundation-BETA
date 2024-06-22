@@ -98,7 +98,7 @@ WSGI_APPLICATION = 'SMS2.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
+        'NAME': 'database_psql',
 	      'USER': 'postgres',
 	      'PASSWORD': '243313',
 	      'HOST': 'localhost',
