@@ -1,17 +1,16 @@
-# Computer Vision Exam Evaluation System
+# Student Management System
 
   ## Overview
-  - This project is a computer vision-based system designed to automate the evaluation of exam sheet papers. By utilizing a camera, the system captures the exam sheets, processes the data, and automatically sends the results to students via email. It supports multiple types of questions, including multiple-choice, matching, true-false, and fill-in-the-blank, making it a versatile tool for educational institutions.
+  - The Student Management System is a web-based platform designed to streamline the management of student exam results and facilitate communication between students and teachers. The system provides a user-friendly interface where students can view their exam results, and engage in direct communication with their teachers for feedback or casual discussions. This system aims to enhance the educational experience by promoting transparency and accessibility.
+  
+  ## Tech Stack
+  - Frontend: Next.js for building a responsive and interactive user interface.
+  - Backend: Django (Python) for handling server-side logic, API requests, and managing data.
+  - Database: PostgreSQL for storing student information, exam results, and chat logs.
+  - Authentication: Firebase Authentication for managing user login and secure access.
 
   ## Features
-  - Automated Exam Evaluation: The system can accurately assess multiple types of questions, ensuring a fair and consistent grading process.
-  - Computer Vision Integration: Uses advanced computer vision techniques to interpret the answers marked on physical exam sheets.
-  - Email Notifications: Once the exam is evaluated, the results are automatically sent to the respective students via email.
-  - Multiple Question Types: The project supports the evaluation of multiple-choice, matching, true-false, and fill-in-the-blank questions.
-
-  ## Tech Stack
-  - Backend: Flask (Python), Azure vision
-  - Database: PostgreSQL for storing student data and exam results.
-  - Deploment: Railway
-  - Frontend: HTML, CSS and JS
-  - Computer Vision: OpenCV (Python) for processing images and interpreting exam sheets.
+  - Exam Results Management: Students can view their exam results in a detailed and organized manner.
+  - Teacher-Student Communication: Enables students to chat with their teachers, asking questions or seeking clarification on exam results.
+  - Secure Authentication: Only authorized users can access the system, ensuring privacy and security.
+  - User-Friendly Interface: Designed with simplicity in mind, making it easy for both students and teachers to navigate the platform.
